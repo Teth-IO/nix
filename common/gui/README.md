@@ -8,7 +8,7 @@ ici `mutableUsers = false;` pour les rendre declaratif, autrement dit les utilis
 
 ## GUI
 
-dankMaterialShell & niri (enciennement hyprland & caelestia)
+dankMaterialShell & niri (enciennement hyprland & caelestia)  
 terminal foot avec shell nushell et multiplexer zellij  
 theme d'application = kanso.nvim zen  
 
@@ -29,3 +29,4 @@ Integre la configuration de plusieurs app (hyprland, caelestia, kitty, yazi, ...
 # ACKNOWLEDGEMENTS :  
 
 [linuxmobile](https://github.com/linuxmobile/kaku)
+
