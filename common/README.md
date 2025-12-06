@@ -53,3 +53,12 @@ Manuellement on utilise :
 
 le lock file est mis à jour directement depuis le dépôt par une action
 
+# disk-config.nix
+
+la configuration de disque utilisé par disko  
+simple configuration sans fioriture et avec optimisation du BTRFS (voir les mountOptions) 
+
+nvme0n1  
+- nvme0n1p1 VFAT 512M /boot  
+- nvme0n1p2 LUKS 100%  
+-- crypted BTRFS -f subvol /  
