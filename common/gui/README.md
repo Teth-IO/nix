@@ -14,7 +14,7 @@ DankMaterialShell sert de shell GUI et greeter, il est basé sur quickshell (bes
 
 ## APPs
 
-Stack CLI :
+Stack CLI :  
 emulateur de terminal foot avec shell nushell et multiplexer zellij  
 foot est léger, rapide, nativement consu pour wayland et propose toute les features d'un emulateur moderne (et compète avec facilement avec les grand nom) [ranking](https://ucs-detect.readthedocs.io/results.html#general-tabulated-summary)  
 theme d'application = [kanso.nvim zen](https://github.com/webhooked/kanso.nvim/tree/main/extras)  
@@ -36,5 +36,6 @@ Gère la configuration de plusieurs app (niri, dms, foot, yazi, ...) et du themi
 # ACKNOWLEDGEMENTS :  
 
 [linuxmobile](https://github.com/linuxmobile/kaku)
+
 
 
