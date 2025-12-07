@@ -75,6 +75,9 @@
         };
       };
       hotkey-overlay.skip-at-startup = true;
+      spawn-at-startup = [
+        { sh = "owncloud"; }
+      ];
       binds = with config.lib.niri.actions; {
         "Mod+Left".action = focus-column-left;
         "Mod+Down".action = focus-window-down;

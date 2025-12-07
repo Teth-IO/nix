@@ -65,11 +65,11 @@
     dates = "10:00";
   };
   nix.gc = {
-  automatic = true;
-  dates = "weekly";
-  options = "--delete-older-than 30d";
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
-  nix.optimise.automatic = true;
+  nix.settings.auto-optimise-store = true;
 
   # certs
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ./certs/lan.pem ];

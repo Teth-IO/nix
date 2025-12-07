@@ -34,18 +34,18 @@ On veut une mise à jour automatisé des applications.
 ```nix
   system.autoUpgrade = {
     enable = true;
-    flake = git+https://gitea.lan/admin/nix;
-    dates = "10:10";
+    flake = "git+https://gitea.lan/admin/nix";
+    dates = "10:00";
   };
   nix.gc = {
-  automatic = true;
-  dates = "weekly";
-  options = "--delete-older-than 30d";
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
-  nix.optimise.automatic = true;
+  nix.settings.auto-optimise-store = true;
 ```
 
-la mise à jour se fait tout les jours, il y a aussi une Garbage Collection qui supprime les configuration systèmes précédentes après 30 jours et le lancement automatique de l’optimisateur du nix store.
+la mise à jour se fait tout les jours à 10h, il y a aussi une Garbage Collection qui supprime les configuration systèmes précédentes après 7 jours et le lancement automatique de l’optimisateur du nix store après chaque build.  
 
 Manuellement on utilise :
 - `nix flake update` (depuis un dossier avec le flake à dispo, maj le flake.lock)
@@ -59,6 +59,6 @@ la configuration de disque utilisé par disko
 simple configuration sans fioriture et avec optimisation du BTRFS (voir les mountOptions) 
 
 nvme0n1  
-- nvme0n1p1 VFAT 512M /boot  
-- nvme0n1p2 LUKS 100%  
--- crypted BTRFS -f subvol /  
+|- nvme0n1p1 VFAT 512M /boot  
+|- nvme0n1p2 LUKS 100%  
+ |- crypted BTRFS -f subvol /  

@@ -31,8 +31,6 @@
     };
   };
 
-  services.owncloud-client.enable = true;
-
   # theme
   qt = {
     enable = true;
