@@ -1,6 +1,6 @@
-OS declaratif immutable et reproductible
+OS declaratif, immutable et reproductible
 Installation automatisé  
-Choix des dernières technologies (btrfs, zfs, systemd-boot, zram, dernier kernel disponible)  
+Choix des technologies à la pointe (btrfs, zfs, systemd-boot, zram, latest kernel)  
 Sécurisé (luks, zpool chiffré, SOPS)  
 Maintenance automatisé (scrubbing, trimming, garbage collection et mise à jour)
 
@@ -51,4 +51,5 @@ anywhere est lancé avec une commande :
 exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json  --flake .#nixos-k3s --target-host root@192.168.1.89`
 
 exemple pour un dépôt : `nix run github:nix-community/nixos-anywhere -- --flake git+https://gitea.lan/admin/nix#server --target-host root@192.168.1.11`  
+
 on ne met pas de --generate-hardware-config nixos-facter ./facter.json car le fichier doit être dispo dans le dépôt donc fait au préalable
