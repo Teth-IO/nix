@@ -94,7 +94,7 @@
   }];
 
   # boot
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
 
   environment.systemPackages = with pkgs; [
     # Apps

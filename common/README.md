@@ -27,6 +27,10 @@ On utilise systemd-boot comme solution moderne, On utilise aussi le module de ke
   zramSwap.enable = true;
 ```
 
+## optimisation reseau
+
+divers optimisation (buffer, ...), le kernel comprend deja le BBR, on active le TCP Fast Open
+
 ## Maintenance
 
 On veut une mise à jour automatisé des applications.

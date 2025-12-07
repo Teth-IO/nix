@@ -6,6 +6,18 @@ La configuration communes a toutes mes installations avec interfaces graphique
 
 ici `mutableUsers = false;` pour les rendre declaratif, autrement dit les utilisateurs ne seront pas gerables autrement que par les fichiers de configurations.
 
+## sécurité
+
+on utilise sudo-rs pour sudo et su  
+on augmente aussi le nombre maximal de fichier pouvant etre ouvert, utile dans certaine situation notamment la compilation
+
+
+# kernel  
+
+on utilise le kernel de cachyos en lto.  
+le kernel comprend de nombreux patch, est compile en LLVM/clang avec Thin LTO.  
+Il propose plusieurs scheduler, certain built-in comme BORE, et d'autre selectionnable avec scx  
+
 ## GUI
 
 Sous Wayland avec DankMaterialShell & niri :  

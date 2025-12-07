@@ -1,6 +1,6 @@
 OS declaratif, immutable et reproductible
 Installation automatisé  
-Choix des technologies à la pointe (btrfs, zfs, systemd-boot, zram, latest kernel)  
+Choix des technologies à la pointe (btrfs, zfs, systemd-boot, zram,  kernel cachyos)  
 Sécurisé (luks, zpool chiffré, SOPS)  
 Maintenance automatisé (scrubbing, trimming, garbage collection et mise à jour)
 

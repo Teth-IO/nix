@@ -59,10 +59,10 @@ Les snapshot sont touvable à la racine du dataset dans un dossier caché .zfs (
 
 # Boot
 
-On utilise le kernel en longterm (standard) pour la compatibilité avec le ZFS.
+On utilise le kernel server de cachyos qui est mainline et qui est patcher pour le ZFS (pas besoin d'etre en LTS du coup)
 
 ```nix
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-server;
 ```
 
 # SOPS-Nix
