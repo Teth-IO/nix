@@ -17,14 +17,19 @@ trimming et scrubbing automatique
 
 ## Boot
 
-On utilise systemd-boot comme solution moderne, On utilise aussi le module de kernel zram pour utiliser de la RAM compressé comme swap.
+On utilise systemd-boot comme solution légère et moderne. On utilise aussi le module de kernel zram pour utiliser de la RAM compressé comme swap et on active le tmp sur tmpfs.
 
 ```nix
-  boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.systemd.enable = true;
-  zramSwap.enable = true;
+  boot = {
+    plymouth.enable = true;
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    initrd.systemd.enable = true;
+    tmp = {
+      useTmpfs = true;
+      cleanOnBoot = true;
+    };
+  };
 ```
 
 ## optimisation reseau
@@ -66,3 +71,4 @@ nvme0n1
 |- nvme0n1p1 VFAT 512M /boot  
 |- nvme0n1p2 LUKS 100%  
  |- crypted BTRFS -f subvol /  
+
