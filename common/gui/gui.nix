@@ -8,10 +8,6 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  imports = [
-    inputs.dankMaterialShell.nixosModules.greeter
-  ];
-
   # niri greeter, display manager, session manager
   programs.dankMaterialShell.greeter = {
     enable = true;
@@ -69,7 +65,7 @@
 
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 
-  # security
+  # security, polkit, sudo et ulimit 4096
   security = {
     polkit.enable = true;
     rtkit.enable = true;
@@ -78,20 +74,18 @@
       execWheelOnly = true;
       wheelNeedsPassword = false;
     };
+    pam.loginLimits = [{
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "4096";
+    }];
   };
   systemd.user.services.niri-flake-polkit.enable = false;
 
   # keyring (gnome keyring fait aussi le ssh agent)
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
-
-  # increase max number of open file
-  security.pam.loginLimits = [{
-    domain = "*";
-    type = "soft";
-    item = "nofile";
-    value = "4096";
-  }];
 
   # boot
   boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
@@ -143,3 +137,4 @@
     vulkan-tools
   ];
 }
+
