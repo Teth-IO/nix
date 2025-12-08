@@ -5,7 +5,6 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     sops-nix.url = "github:Mic92/sops-nix";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,7 +29,7 @@
 
   };
 
-  outputs = { self, nixpkgs, disko, nixos-facter-modules, sops-nix, chaotic, ... }@inputs: 
+  outputs = { self, nixpkgs, disko, nixos-facter-modules, sops-nix, ... }@inputs: 
     {
       nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -51,7 +50,6 @@
           disko.nixosModules.disko
           nixos-facter-modules.nixosModules.facter
           { config.facter.reportPath = ./laptop/facter.json; }
-          chaotic.nixosModules.default
           inputs.dankMaterialShell.nixosModules.greeter
           inputs.home-manager.nixosModules.home-manager
           {

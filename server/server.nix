@@ -16,9 +16,8 @@
   # boot
   boot = {
     supportedFilesystems = ["zfs"];
-    kernelPackages = pkgs.linuxPackages_cachyos-server;
+    kernelPackages = pkgs.linuxPackages_xanmod;
     zfs.extraPools = [ "raid" ];
-    zfs.package = pkgs.zfs_cachyos;
   };
   
   # réseau

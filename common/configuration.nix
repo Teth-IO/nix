@@ -52,7 +52,7 @@
     # Enable IPv4 forwarding for VPN/container routing
     "net.ipv4.ip_forward" = 1;
     # Bufferbloat mitigations + slight improvement in throughput & latency
-    #"net.ipv4.tcp_congestion_control" = "bbr"; inclue dans le kernel cachyos
+    #"net.ipv4.tcp_congestion_control" = "bbr"; inclue dans xanmod
     "net.core.default_qdisc" = "cake";
     ## Network performance optimizations
     # Increase network buffer sizes

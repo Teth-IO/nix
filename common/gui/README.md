@@ -14,9 +14,10 @@ on augmente aussi le nombre maximal de fichier pouvant etre ouvert, utile dans c
 
 # kernel  
 
-on utilise le kernel de cachyos en lto.  
-le kernel comprend de nombreux patch, est compile en LLVM/clang avec Thin LTO.  
-Il propose plusieurs scheduler, certain built-in comme BORE, et d'autre selectionnable avec scx  
+on utilise le kernel [xanmod](https://xanmod.org/).
+TL;DR : 
+le kernel comprend de nombreux patch et est compilé en LLVM/clang avec Thin LTO.
+Il intègre sched_ext pour permettre a l'utilisateur de selectionner le scheduler à utiliser.
 
 ## GUI
 

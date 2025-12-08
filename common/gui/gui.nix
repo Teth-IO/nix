@@ -91,7 +91,7 @@
   security.pam.services.greetd.enableGnomeKeyring = true;
 
   # boot
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   environment.systemPackages = with pkgs; [
     # Apps
