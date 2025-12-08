@@ -10,7 +10,7 @@ NixOS est **déclaratif** (OS as Code) ce qui permet une grande capacité de cus
 Il est aussi **immutable** et garde à disposition le paramétarge et les binaires précédents ce qui permet de pouvoir **rollback** dans les versions précédentes de l’OS en cas de problème.  
 Les mise à jours sont **atomiques**, comme les transactions d'un base de donnée, ce qui permet de s'assurer que le system n'est pas cassé suite au changement.
 
-Cette distribution n’est pas parfaite, elle ne propose pas de MAC (Mandatory Access Control) et le secure-boot (lanzaboote) n’est pas encore upstream
+Cette distribution n’est pas parfaite (aucune de l'est de toute façon), elle ne propose pas de MAC (Mandatory Access Control) et le secure-boot (lanzaboote) n’est pas encore upstream
 
 ## flake.nix inputs
 
@@ -53,3 +53,4 @@ exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --ge
 exemple pour un dépôt : `nix run github:nix-community/nixos-anywhere -- --flake git+https://gitea.lan/admin/nix#server --target-host root@192.168.1.11`  
 
 on ne met pas de --generate-hardware-config nixos-facter ./facter.json car le fichier doit être dispo dans le dépôt donc fait au préalable
+
