@@ -4,6 +4,7 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     sops-nix.url = "github:Mic92/sops-nix";
 
     home-manager = {
@@ -29,7 +30,7 @@
 
   };
 
-  outputs = { self, nixpkgs, disko, nixos-facter-modules, sops-nix, ... }@inputs: 
+  outputs = { self, nixpkgs, disko, nixos-facter-modules, sops-nix, determinate, ... }@inputs: 
     {
       nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -40,6 +41,8 @@
           nixos-facter-modules.nixosModules.facter
           { config.facter.reportPath = ./server/facter.json; }
           sops-nix.nixosModules.sops
+          determinate.nixosModules.default
+
         ];
       };
         nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
@@ -51,6 +54,7 @@
           nixos-facter-modules.nixosModules.facter
           { config.facter.reportPath = ./laptop/facter.json; }
           inputs.dankMaterialShell.nixosModules.greeter
+          determinate.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {

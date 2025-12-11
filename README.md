@@ -1,8 +1,9 @@
 OS declaratif, immutable et reproductible
 Installation automatisé  
-Choix des technologies à la pointe (btrfs, zfs, systemd-boot, zram,  kernel xanmod)  
+Choix des technologies de pointe (zfs, zram, pipewire, ...)  
 Sécurisé (luks, zpool chiffré, SOPS)  
-Maintenance automatisé (scrubbing, trimming, garbage collection et mise à jour)
+Maintenance automatisé (scrubbing, trimming, garbage collection et mise à jour)  
+optimisé (kernel cachyos, features de Determinate Nix, ...)
 
 # NixOS
 
