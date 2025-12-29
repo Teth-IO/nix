@@ -4,9 +4,8 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     sops-nix.url = "github:Mic92/sops-nix";
-
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dankMaterialShell = {
+    dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.dgop.follows = "dgop";
@@ -36,25 +35,22 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          ./server/server.nix
+          ./hosts/server/server.nix
           disko.nixosModules.disko
           nixos-facter-modules.nixosModules.facter
-          { config.facter.reportPath = ./server/facter.json; }
+          { config.facter.reportPath = ./hosts/server/facter.json; }
           sops-nix.nixosModules.sops
           determinate.nixosModules.default
-
         ];
       };
         nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          ./laptop/laptop.nix
+          ./hosts/laptop/laptop.nix
           disko.nixosModules.disko
           nixos-facter-modules.nixosModules.facter
-          { config.facter.reportPath = ./laptop/facter.json; }
-          inputs.dankMaterialShell.nixosModules.greeter
-          determinate.nixosModules.default
+          { config.facter.reportPath = ./hosts/laptop/facter.json; }
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -65,6 +61,8 @@
               useUserPackages = true;
             };
           }
+          inputs.dms.nixosModules.greeter
+          determinate.nixosModules.default
         ];
       };
     };

@@ -1,9 +1,9 @@
-OS declaratif, immutable et reproductible
+collections de configurations d'OS declaratives, immutables et reproductibles  
 Installation automatisé  
-Choix des technologies de pointe (zfs, zram, pipewire, ...)  
-Sécurisé (luks, zpool chiffré, SOPS)  
-Maintenance automatisé (scrubbing, trimming, garbage collection et mise à jour)  
-optimisé (kernel cachyos, features de Determinate Nix, ...)
+Maintenant GitOps avec maj et maintenance automatique (scrubbing, trimming, snapshots, garbage collection, ...)  
+moderne (zfs, btrfs, zram, ...)  
+Sécurisé (FDE, zpool chiffré, SOPS)  
+optimizé (sysctl, parametrage des FS...)
 
 # NixOS
 
@@ -11,7 +11,7 @@ NixOS est **déclaratif** (OS as Code) ce qui permet une grande capacité de cus
 Il est aussi **immutable** et garde à disposition le paramétarge et les binaires précédents ce qui permet de pouvoir **rollback** dans les versions précédentes de l’OS en cas de problème.  
 Les mise à jours sont **atomiques**, comme les transactions d'un base de donnée, ce qui permet de s'assurer que le system n'est pas cassé suite au changement.
 
-Cette distribution n’est pas parfaite (aucune de l'est de toute façon), elle ne propose pas de MAC (Mandatory Access Control) et le secure-boot (lanzaboote) n’est pas encore upstream
+Cette distribution n’est pas parfaite, elle ne propose pas de MAC (Mandatory Access Control) et le secure-boot (lanzaboote) n’est pas encore upstream
 
 ## flake.nix inputs
 
@@ -29,9 +29,11 @@ Chacune avec les modules quelle utiliseront : inputs et la configuration à suiv
 > **warning** Warning
 > Le hostname doit correspondre au nom de la configuration pour le programme de maj identifie la configuration à appliquer
 
+![laptop][./hosts/laptop/2025-12-29_22-25.png]
+
 ## Installation
 
-Doit se faire depuis un NixOS  
+Doit se faire depuis un NixOS (qu'importe la version) vers une machine faisant tourner le media d'instalation NixOS en LTS (sinon l'installation plantera a cause de la compatibilité ZFS)  
 Besoin de flake :
 - `nano /etc/nixos/configuration.nix`
 
@@ -49,9 +51,13 @@ anywhere est lancé avec une commande :
 > **warning** Warning
 > Il y a bien deux espace avant le --flake
 
-exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json  --flake .#nixos-k3s --target-host root@192.168.1.89`
+exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json  --flake .#hostname --target-host root@192.168.1.89`
 
-exemple pour un dépôt : `nix run github:nix-community/nixos-anywhere -- --flake git+https://gitea.lan/admin/nix#server --target-host root@192.168.1.11`  
+exemple pour un dépôt : `nix run github:nix-community/nixos-anywhere -- --flake git+https://gitea.lan/admin/nix#hostname --target-host root@192.168.1.11`  
+on ne met pas de --generate-hardware-config nixos-facter ./facter.json car le fichier doit être dispo dans le dépôt donc fait au préalable  
 
-on ne met pas de --generate-hardware-config nixos-facter ./facter.json car le fichier doit être dispo dans le dépôt donc fait au préalable
+## premier boot
 
+`systemd-cryptenroll --tpm2-device auto /dev/nvme0n1p2` (enrôle le mot de passe de la partition LUKS dans le TPM2)  
+`nix-store --optimise` (on a l'optimization automatique mais elle ne s'applique qu'au nouveaux fichier)  
+`sudo nixos-rebuild switch --option extra-substituters https://install.determinate.systems --option extra-trusted-public-keys cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM= --flake .#hostname` (configure le substituer determinate nix pour ne pas avoir à le build soit même)  

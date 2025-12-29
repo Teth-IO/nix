@@ -1,0 +1,22 @@
+{
+  "name": "kanso zen",
+  "primary": "#8ba4b0",
+  "primaryText": "#090E13",
+  "primaryContainer": "#090E13",
+  "secondary": "#090E13",
+  "surface": "#090E13",
+  "surfaceText": "#ffffff",
+  "surfaceVariant": "#090E13",
+  "surfaceVariantText": "#ffffff",
+  "surfaceTint": "#ffffff",
+  "background": "#090E13",
+  "backgroundText": "#ffffff",
+  "outline": "#ffffff",
+  "surfaceContainer": "#090E13",
+  "surfaceContainerHigh": "#090E13",
+  "surfaceContainerHighest": "#090E13",
+  "error": "#c4746e",
+  "warning": "#8a9a7b",
+  "info": "#8ba4b0",
+  "matugen_type": "scheme-expressive"
+}
