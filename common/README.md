@@ -22,6 +22,7 @@ Plymouth est desactive car j'aime voir ce qu'il se passe (et les potentiels erre
 
 ## optimisation reseau
 
+https://wiki.archlinux.org/title/Sysctl#Improving_performance  
 divers optimisation, notamment l'ajout du BBR et le TCP Fast Open  
 
 ## Maintenance

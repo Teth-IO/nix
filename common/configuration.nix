@@ -124,16 +124,4 @@
   # certs
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ./certs/lan.pem ];
 
-  # notifications des services en echec
-  systemd.services."notify-failure@nixos-upgrade" = {
-    enable = true;
-    description = "Failure notification for %i";
-    scriptArgs = "%i"; # Content after '@' will be sent as '$1' in the below script
-    script = ''${pkgs.curl}/bin/curl \
-             --fail `#fail fast on server errors` \
-             --show-error --silent `#show error <=> it fails` \
-             --max-time 10 \
-             --retry 3 \
-             --data "$1 exited with errors" ntfy.lan/nix'';
-  };
 }
