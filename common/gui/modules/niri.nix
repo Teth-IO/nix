@@ -95,6 +95,7 @@
         "Mod+space".action = spawn-sh "rofi -show drun";
         "Mod+Return".action = spawn "foot";
         "Print".action = spawn-sh "QT_SCALE_FACTOR=0.5 flameshot gui";
+        "Mod+Print".action.screenshot-screen = {write-to-disk = true;};
       };
     };
   };

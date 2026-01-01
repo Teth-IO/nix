@@ -3,7 +3,7 @@ Installation automatisé
 Maintenant GitOps avec maj et maintenance automatique (scrubbing, trimming, snapshots, garbage collection, ...)  
 moderne (zfs, btrfs, zram, ...)  
 Sécurisé (FDE, zpool chiffré, SOPS)  
-optimizé (sysctl, parametrage des FS...)
+optimizé (tcp fast open, bbr, parametrage des FS, kernel march=native et thinlto...)
 
 # NixOS
 
@@ -29,7 +29,7 @@ Chacune avec les modules quelle utiliseront : inputs et la configuration à suiv
 > **warning** Warning
 > Le hostname doit correspondre au nom de la configuration pour le programme de maj identifie la configuration à appliquer
 
-![laptop](./hosts/laptop/2025-12-29_22-25.png)
+![laptop](./hosts/Screenshot-from-2026-01-01-15-43-55)
 
 ## Installation
 

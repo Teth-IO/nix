@@ -50,25 +50,3 @@ Manuellement on utilise :
 - `nixos-rebuild switch --flake git+https://gitea.lan/admin/nix#server`
 
 le lock file est mis à jour directement depuis le dépôt par une action
-
-# disk-config.nix
-
-la configuration de disque utilisé par disko pour mes installs (hors ZFS)  
-root on BTRFS sous LUKS
-
-nvme0n1  
-- nvme0n1p1 VFAT 512M /boot  
-- nvme0n1p2 LUKS 100%  
--- crypted btrfs -f subvol /  
-
-divers optimisation dans le parametrage du system de fichier :  
-
-```
-                        mountOptions = [ 
-                          "rw"
-                          "noatime"
-                          "ssd"
-                          "space_cache=v2"
-                          "compress-force=zstd:1" 
-                        ];
-```

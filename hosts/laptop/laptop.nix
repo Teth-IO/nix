@@ -8,9 +8,10 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../common/disk-config.nix
+    ../../common/gui/disk-config.nix
     ../../common/configuration.nix
-    ../../gui/gui.nix
+    ../../common/gui/gui.nix
+    ../../common/gui/kernel.nix
   ];
 
   # réseau

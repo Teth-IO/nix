@@ -37,9 +37,6 @@
   services.btrfs.autoScrub.enable = true;
   services.fstrim.enable = true;
 
-  # kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # bluetooth
   hardware.bluetooth = {
     enable = true;
