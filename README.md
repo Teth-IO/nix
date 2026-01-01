@@ -29,7 +29,7 @@ Chacune avec les modules quelle utiliseront : inputs et la configuration à suiv
 > **warning** Warning
 > Le hostname doit correspondre au nom de la configuration pour le programme de maj identifie la configuration à appliquer
 
-![laptop](./hosts/Screenshot-from-2026-01-01-15-43-55)
+![laptop](./hosts/Screenshot-from-2026-01-01-15-43-55.png)
 
 ## Installation
 
