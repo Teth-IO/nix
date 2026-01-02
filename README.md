@@ -26,7 +26,7 @@ Installation se fait ici à partir de l'iso minimal par ssh avec [nixos-anywhere
 On désigne ici plusieurs nixosConfigurations, une par installation (server, pc portable, ...).  
 Chacune avec les modules quelle utiliseront : inputs et la configuration à suivre (./server/server.nix; ./laptop/laptop.nix)
 
-> **warning** Warning
+> [!WARNING]
 > Le hostname doit correspondre au nom de la configuration pour le programme de maj identifie la configuration à appliquer
 
 ![laptop](./hosts/laptop/Screenshot-from-2026-01-01-15-43-55.png)
@@ -48,7 +48,7 @@ anywhere est lancé avec une commande :
 
 `<path to configuration>` peut être un dépôt git ou un chemin (e.g. `.` )
 
-> **warning** Warning
+> [!WARNING]
 > Il y a bien deux espace avant le --flake
 
 exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json  --flake .#hostname --target-host root@192.168.1.89`
