@@ -1,9 +1,13 @@
 # Premier boot
 
 (fait suite au premier README)  
+
+> **warning** Warning
+> commenter `boot.zfs.extraPools = [ "raid" ];` s'il n'est pas présent sinon bloque le boot
+
 Importer la age key dans `/root/.config/sops/age/keys.txt`  
 Rebuild pour que les SOPS se mettent  
-lancer `zfs set keylocation=file:///run/secrets/ZFS raid/nas` pour que le dataset raid/nas cherche la clef dans le secret exposé par SOPS-nix au lieux de demander le mdp au boot  
+lancer `zfs set keylocation=file:///run/secrets/ZFS raid/nas` pour que le dataset raid/nas cherche la clef dans le secret exposé par SOPS-nix au lieu de demander le mdp au boot   
 connexion au tailnet  
 fluxcd (voir k3s)
 
