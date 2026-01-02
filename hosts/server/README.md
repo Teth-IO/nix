@@ -38,7 +38,7 @@ Les données des applications hébergées sous K3S seront sous un pool ZFS en mi
 
 création du pool raid est dataset nas avec les meme options que ci-dessus :
 
-`zpool create -o ashift=12 -o xattr=sa -o compression=lz4 -o atime=off -o recordsize=1M -m /mnt/raid raid mirror /dev/sda /dev/sdb`
+`zpool create -o ashift=12 -O xattr=sa -O compression=lz4 -O atime=off -O -m /mnt/raid raid mirror /dev/sda /dev/sdb`
 
 ajout du chiffrement au pool :
 
