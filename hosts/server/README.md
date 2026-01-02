@@ -3,7 +3,7 @@
 (fait suite au premier README)  
 Importer la age key dans `/root/.config/sops/age/keys.txt`  
 Rebuild pour que les SOPS se mettent  
-lancer `zfs set keylocation=file:///run/secrets/ZFS raid/nas` pour que le dataset raid/nas cherche la clef dans le secret exposé par SOPS-nix  
+lancer `zfs set keylocation=file:///run/secrets/ZFS raid/nas` pour que le dataset raid/nas cherche la clef dans le secret exposé par SOPS-nix au lieux de demander le mdp au boot  
 connexion au tailnet  
 fluxcd (voir k3s)
 
@@ -43,6 +43,10 @@ création du pool raid est dataset nas avec les meme options que ci-dessus :
 ajout du chiffrement au pool :
 
 `zfs create -o encryption=on -o keylocation=prompt -o keyformat=passphrase raid/nas`
+
+aussi possible de changer la keylocation par un fichier au lieu du prompt, ce qu'on fait ici avec SOPS (voir plus bas) :
+
+`zfs set keylocation=file:///run/secrets/ZFS raid/nas`
 
 ## snapshots
 
