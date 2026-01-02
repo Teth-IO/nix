@@ -70,19 +70,19 @@ divers optimisation dans le parametrage du system de fichier :
 override du kernel latest avec optimization d'achitecure et compilé en thinlto  
 https://wiki.gentoo.org/wiki/Kernel/Optimization
 
-compilation :
+compilation :  
+- en LLVM/clang  
+- en march=native avec la config associe (kernel 6.16+)  
+- avec thinlto et la config associe (kernel 5.12+)  
+- en -O3 (n'est absolument pas recommandé)
 
-    en LLVM/clang
-    en march=native avec la config associe (kernel 6.16+)
-    avec thinlto et la config associe (kernel 5.12+)
-    en -O3 (n'est absolument pas recommandé)
-
-note : les options de configuration du kernel en fonctionnement sont disponibles sous /proc/config.gz
-exemple :
-
+note : les options de configuration du kernel en fonctionnement sont disponibles sous /proc/config.gz  
+exemple :  
+```
 cat /proc/config.gz | gunzip > running.config
 cat running.config | grep LTO  
 cat running.config | grep NATIVE  
+```
 
 # ACKNOWLEDGEMENTS :  
 
