@@ -2,7 +2,7 @@
 
 (fait suite au premier README)  
 
-> **warning** Warning
+> [!WARNING]
 > commenter `boot.zfs.extraPools = [ "raid" ];` s'il n'est pas présent sinon bloque le boot
 
 Importer la age key dans `/root/.config/sops/age/keys.txt`  
@@ -56,7 +56,7 @@ aussi possible de changer la keylocation par un fichier au lieu du prompt, ce qu
 
 snapshot automatiques (par défaut : 4 de 15 minutes, 24 toutes les heures, 7 journalières, 4 hebdomadères, 12 mensuelles), trim, scrub et paramétrage de ZED
 
-> **warning** Warning
+> [!WARNING]
 > besoin de `zfs set com.sun:auto-snapshot=true raid` pour que les snapshot auto soit accepté par le pool
 
 ```nix
