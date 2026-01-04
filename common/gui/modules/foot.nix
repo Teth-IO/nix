@@ -54,7 +54,7 @@
         regular1 = "c4746e";
         regular2 = "8a9a7b";
         regular3 = "c4b28a";
-        regular4 = "8ba4b0";
+        regular4 = "090e13"; # background color des apps en TUI, anciennement 8ba4b0
         regular5 = "a292a3";
         regular6 = "8ea4a2";
         regular7 = "a4a7a4";
