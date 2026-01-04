@@ -8,6 +8,31 @@
 {
   nixpkgs.config.allowUnfree = true;
 
+  imports = [ inputs.niri.nixosModules.niri ];
+  nixpkgs.overlays = [ 
+    inputs.niri.overlays.niri
+    (final: prev: {
+    # on créer kernllvmPackages au lieu de remplacer llvmPackages lui même sinon tout les packets en clang vont devoir être recompiler comme aucun artefact correspond à ces builds ne sera dans le cache
+    kernllvmPackages = prev.llvmPackages // {
+      stdenv = prev.llvmPackages.stdenv // {
+        mkDerivation =
+          attrs:
+          (prev.llvmPackages.stdenv.mkDerivation attrs).overrideAttrs (this: {
+            env = (this.env or { }) // {
+              # Fix `--target` spam.
+              NIX_CC_WRAPPER_SUPPRESS_TARGET_WARNING = 1;
+              # Fix `-nostdinc` warnings.
+              NIX_CFLAGS_COMPILE = prev.lib.concatStringsSep " " [
+                (this.env.NIX_CFLAGS_COMPILE or "")
+                "-Wno-unused-command-line-argument"
+              ];
+            };
+          });
+      };
+    };
+  })
+  ];
+
   # niri greeter, display manager, session manager
   programs.dankMaterialShell.greeter = {
     enable = true;

@@ -18,31 +18,6 @@
     };
   };
 
-  imports = [ inputs.niri.nixosModules.niri ];
-  nixpkgs.overlays = [ 
-    inputs.niri.overlays.niri
-    (final: prev: {
-    # on créer kernllvmPackages au lieu de remplacer llvmPackages lui même sinon tout les packets en clang vont devoir être recompiler comme aucun artefact correspond à ces builds ne sera dans le cache
-    kernllvmPackages = prev.llvmPackages // {
-      stdenv = prev.llvmPackages.stdenv // {
-        mkDerivation =
-          attrs:
-          (prev.llvmPackages.stdenv.mkDerivation attrs).overrideAttrs (this: {
-            env = (this.env or { }) // {
-              # Fix `--target` spam.
-              NIX_CC_WRAPPER_SUPPRESS_TARGET_WARNING = 1;
-              # Fix `-nostdinc` warnings.
-              NIX_CFLAGS_COMPILE = prev.lib.concatStringsSep " " [
-                (this.env.NIX_CFLAGS_COMPILE or "")
-                "-Wno-unused-command-line-argument"
-              ];
-            };
-          });
-      };
-    };
-  })
-  ];
-
   boot.kernel.sysctl = {
 	  ## https://wiki.archlinux.org/title/Sysctl#Improving_performance
 	  "net.ipv4.icmp_ignore_bogus_error_responses" = 1;
