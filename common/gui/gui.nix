@@ -8,7 +8,10 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  imports = [ inputs.niri.nixosModules.niri ];
+  imports = [ 
+    inputs.niri.nixosModules.niri
+    inputs.dms.nixosModules.greeter
+  ];
   nixpkgs.overlays = [ 
     inputs.niri.overlays.niri
     (final: prev: {

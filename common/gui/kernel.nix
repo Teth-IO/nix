@@ -30,6 +30,7 @@
       ignoreConfigErrors = true;
       structuredExtraConfig = with lib.kernel; {
         LTO_CLANG_THIN = lib.mkForce yes;
+        X86_NATIVE_CPU = lib.mkForce yes;
       };
     };
   });
