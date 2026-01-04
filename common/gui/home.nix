@@ -34,7 +34,7 @@
   # theme
   qt = {
     enable = true;
-    platformTheme.name = "gtk"; #et pas gtk3 sinon bug des tray icons
+    platformTheme.name = "gtk3";
   };
   gtk = {
     enable = true;

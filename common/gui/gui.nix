@@ -49,9 +49,6 @@
     package = pkgs.niri-unstable;
   };
 
-  # obligé sinon home-manager plante
-  programs.dconf.enable = true;
-
   # fonts
   fonts = {
     enableDefaultPackages = true;
@@ -59,6 +56,13 @@
       inter
       nerd-fonts.blex-mono
     ];
+    fontconfig = {
+      defaultFonts = {
+        serif = [  "Inter" ];
+        sansSerif = [ "Inter" ];
+        monospace = [ "BlexMono Nerd Font" ];
+      };
+    };
   };
 
   # BTFS
