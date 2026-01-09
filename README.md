@@ -49,7 +49,7 @@ anywhere est lancé avec une commande :
 `<path to configuration>` peut être un dépôt git ou un chemin (e.g. `.` )
 
 > [!WARNING]
-> Il y a bien deux espace avant le --flake
+> lors d'une installation par nixos-anywhere c'est le pc source qui build les packages pour le pc de destination, il faut donc penser à remplacer l'import de kernel.nix par boot.kernelPackages = pkgs.linuxPackages_latest; pour éviter une compilation en march=native sur une mauvaise architecure
 
 exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json  --flake .#hostname --target-host root@192.168.1.89`
 
