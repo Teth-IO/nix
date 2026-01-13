@@ -44,6 +44,12 @@
   #services.fprintd.tod.enable = true;
   #services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
+  # home-manager
+  home-manager = {
+    backupFileExtension = "hm-backup";
+    users.teth-io = import ./laptop-home.nix;
+  };
+
   # ne pas toucher après l'install
   system.stateVersion = "25.05";
 }

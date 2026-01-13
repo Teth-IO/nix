@@ -10,8 +10,9 @@
 
   imports = [ 
     inputs.niri.nixosModules.niri
-    inputs.dms.nixosModules.greeter
+    #inputs.dms.nixosModules.greeter
   ];
+
   nixpkgs.overlays = [ 
     inputs.niri.overlays.niri
     (final: prev: {
@@ -37,11 +38,11 @@
   ];
 
   # niri greeter, display manager, session manager
-  programs.dankMaterialShell.greeter = {
-    enable = true;
-    compositor.name = "niri";  # Or "hyprland" or "sway"
-    configHome = "/home/teth-io";
-  };
+  #programs.dankMaterialShell.greeter = {
+  #  enable = true;
+  #  compositor.name = "niri";  # Or "hyprland" or "sway"
+  #  configHome = "/home/teth-io";
+  #};
 
   # niri
   programs.niri = {
@@ -55,13 +56,18 @@
     packages = with pkgs; [
       inter
       nerd-fonts.blex-mono
+      eb-garamond
+      nerd-fonts.jetbrains-mono
+      noto-fonts-color-emoji
     ];
     fontconfig = {
       defaultFonts = {
-        serif = [  "Inter" ];
+        serif = [ "EB Garamond" ];
         sansSerif = [ "Inter" ];
-        monospace = [ "BlexMono Nerd Font" ];
+        monospace = [ "JetBrains Mono" ];
+        emoji = [ "Noto Color Emoji" ];
       };
+      antialias = true;
     };
   };
 
@@ -73,6 +79,15 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
   };
 
   # audio
@@ -92,12 +107,6 @@
     home  = "/home/teth-io";
     extraGroups  = [ "wheel" "networkmanager" "libvirtd" ];
     hashedPassword = "redacted";
-  };
-
-  # home-manager
-  home-manager = {
-    backupFileExtension = "hm-backup";
-    users.teth-io = import ./home.nix;
   };
 
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
@@ -126,27 +135,35 @@
     value = "4096";
   }];
 
-  # virtualisation
+  # virt-manager
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
+  # steam, besoin du runtime pour proton-ge donc en service auto
+  programs.steam = {
+    enable = true;
+  };
+
+  # flatpak si besoin
+  services.flatpak.enable = true;
+
   environment.systemPackages = with pkgs; [
     ## Apps
-    #lutris
-    #bottles
-    steam
-    #heroic
+    lutris
+    bottles
+    heroic
     yazi
     librewolf
     keepassxc
     mc
     qbittorrent
-    waydroid
     seahorse
     owncloud-client
     vscodium
     xnviewmp
     (flameshot.override { enableWlrSupport = true; })
+    nautilus
+    wl-clipboard
 
     ## cli stack
     foot
@@ -177,7 +194,9 @@
     usbutils
     ueberzugpp
     binutils
+    pciutils
     dnsmasq
     fastfetch
+    pciutils
   ];
 }

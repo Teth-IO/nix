@@ -19,6 +19,7 @@
         SDL_VIDEODRIVER = "wayland";
         WLR_RENDERER = "vulkan";
         WLR_NO_HARDWARE_CURSORS = "1";
+        QS_ICON_THEME = "Papirus-Dark";
         QT_QPA_PLATFORMTHEME = "qt6ct";
         GTK_IM_MODULE = "simple";
       };
@@ -40,11 +41,17 @@
         };
         warp-mouse-to-focus.enable = true;
         workspace-auto-back-and-forth = true;
+        keyboard.xkb.layout = "fr(latin9)";
       };
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
-        "eDP-1" = {
-          scale = 2.0;
+        "DP-3" = {
+          scale = 1.0;
+          mode = {
+            width = 3440;
+            height = 1440;
+            refresh = 144.001;
+          };
         };
       };
       gestures = {
@@ -77,8 +84,8 @@
       ];
       binds = with config.lib.niri.actions; {
         "Mod+Left".action = focus-column-left;
-        "Mod+Down".action = focus-window-down;
-        "Mod+Up".action = focus-window-up;
+        "Mod+Down".action = focus-workspace-down;
+        "Mod+Up".action = focus-workspace-up;
         "Mod+Right".action = focus-column-right;
         "Mod+Ctrl+Left".action = set-column-width "+10%";
         "Mod+Ctrl+Down".action = set-window-height "-10%";
@@ -94,7 +101,7 @@
         "Mod+L".action = spawn-sh "dms ipc call lock lock";
         "Mod+space".action = spawn-sh "rofi -show drun";
         "Mod+Return".action = spawn "foot";
-        "Print".action = spawn-sh "QT_SCALE_FACTOR=0.5 flameshot gui";
+        "Print".action = spawn-sh "flameshot gui";
         "Mod+Print".action.screenshot-screen = {write-to-disk = true;};
       };
     };

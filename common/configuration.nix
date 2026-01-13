@@ -55,6 +55,22 @@
   # timezone
   time.timeZone = "Europe/Paris";
 
+  # locales
+  i18n.defaultLocale = "fr_FR.UTF-8";
+
+  # Apply system keymap to decrypt/login on boot
+  console = {
+    earlySetup = true;
+    useXkbConfig = true;
+  };
+
+   services = {
+    xserver = {
+      xkb.layout = "fr";
+      xkb.variant = "latin9";
+    };
+  }; 
+  
   # power management 
   services.upower.enable = true;
   services.tuned.enable = true;

@@ -21,6 +21,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+    # Optional, to download less. Neither the module nor the overlay uses this input.
+    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "";
   };
 
   outputs = { self, nixpkgs, disko, nixos-facter-modules, sops-nix, determinate, ... }@inputs: 
@@ -45,6 +48,27 @@
           disko.nixosModules.disko
           nixos-facter-modules.nixosModules.facter
           { config.facter.reportPath = ./hosts/laptop/facter.json; }
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+            };
+          }
+          determinate.nixosModules.default
+        ];
+      };
+        nixosConfigurations.workstation = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/workstation/workstation.nix
+          disko.nixosModules.disko
+          nixos-facter-modules.nixosModules.facter
+          { config.facter.reportPath = ./hosts/workstation/facter.json; }
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
