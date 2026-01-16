@@ -12,8 +12,16 @@
     ../../common/configuration.nix
     ../../common/gui/gui.nix
     ../../common/gui/kernel.nix
+    inputs.dms.nixosModules.greeter
   ];
 
+  # niri greeter, display manager, session manager
+  programs.dankMaterialShell.greeter = {
+    enable = true;
+    compositor.name = "niri";  # Or "hyprland" or "sway"
+    configHome = "/home/teth-io";
+  };
+  
   # réseau
   networking = {
     hostName = "laptop";

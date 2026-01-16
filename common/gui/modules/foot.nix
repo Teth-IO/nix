@@ -40,35 +40,35 @@
         font-monospace-warn = "no";
         sixel = "yes";
       };
-      colors = {
-        # kanso zen
-        alpha = 1.0;
-        background = "090E13";
-        foreground = "C5C9C7";
-        selection-background = "22262d";
-        selection-foreground = "C5C9C7";
-        urls = "72A7BC";
-
-        # normal
-        regular0 = "090e13";
-        regular1 = "c4746e";
-        regular2 = "8a9a7b";
-        regular3 = "c4b28a";
-        regular4 = "090e13"; # background color des apps en TUI, anciennement 8ba4b0
-        regular5 = "a292a3";
-        regular6 = "8ea4a2";
-        regular7 = "a4a7a4";
-
-        # bright
-        bright0 = "5c6066";
-        bright1 = "E46876";
-        bright2 = "87a987";
-        bright3 = "E6C384";
-        bright4 = "7FB4CA";
-        bright5 = "938AA9";
-        bright6 = "7AA89F";
-        bright7 = "C5C9C7";
-      };
+      #colors = {
+      #  # kanso zen
+      #  alpha = 1.0;
+      #  background = "090E13";
+      #  foreground = "C5C9C7";
+      #  selection-background = "22262d";
+      #  selection-foreground = "C5C9C7";
+      #  urls = "72A7BC";
+      #
+      #  # normal
+      #  regular0 = "090e13";
+      #  regular1 = "c4746e";
+      #  regular2 = "8a9a7b";
+      #  regular3 = "c4b28a";
+      #  regular4 = "090e13"; # background color des apps en TUI, anciennement 8ba4b0
+      #  regular5 = "a292a3";
+      #  regular6 = "8ea4a2";
+      #  regular7 = "a4a7a4";
+      #
+      #  # bright
+      #  bright0 = "5c6066";
+      #  bright1 = "E46876";
+      #  bright2 = "87a987";
+      #  bright3 = "E6C384";
+      #  bright4 = "7FB4CA";
+      #  bright5 = "938AA9";
+      #  bright6 = "7AA89F";
+      #  bright7 = "C5C9C7";
+      #};
     };
   };
 }

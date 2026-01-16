@@ -42,7 +42,7 @@
     enable = true;
     font = {
       name = "Inter";
-      size = 12;
+      #size = 12;
     };
     iconTheme = {
       package = pkgs.papirus-icon-theme;

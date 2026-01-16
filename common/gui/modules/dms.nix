@@ -16,14 +16,13 @@
       enableKeybinds = false;   # Automatic keybinding configuration
       enableSpawn = true;      # Auto-start DMS with niri
     };
+    niri.includes = {
+      enable = false;
+    };
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    #enableClipboard = false;            # Clipboard history manager
     enableVPN = false;                  # VPN management widget
-    #enableBrightnessControl = true;    # Backlight/brightness controls
-    #enableColorPicker = false;          # Color picker tool
     enableDynamicTheming = false;       # Wallpaper-based theming (matugen)
     enableAudioWavelength = true;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
-    #enableSystemSound = false;          # System sound effects 
   };
 }

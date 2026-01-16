@@ -37,13 +37,6 @@
   })
   ];
 
-  # niri greeter, display manager, session manager
-  #programs.dankMaterialShell.greeter = {
-  #  enable = true;
-  #  compositor.name = "niri";  # Or "hyprland" or "sway"
-  #  configHome = "/home/teth-io";
-  #};
-
   # niri
   programs.niri = {
     enable = true;
@@ -123,8 +116,11 @@
   };
   systemd.user.services.niri-flake-polkit.enable = false;
 
+  # ssh agent
+  #programs.ssh.startAgent = true;
+
   # keyring (gnome keyring fait aussi le ssh agent)
-  services.gnome.gnome-keyring.enable = true;
+  #services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
 
   # increase max number of open file
@@ -150,8 +146,8 @@
   environment.systemPackages = with pkgs; [
     ## Apps
     lutris
-    bottles
-    heroic
+    #bottles
+    #heroic
     yazi
     librewolf
     keepassxc
@@ -198,5 +194,6 @@
     dnsmasq
     fastfetch
     pciutils
+    lshw
   ];
 }

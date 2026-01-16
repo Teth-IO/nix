@@ -64,7 +64,7 @@
     useXkbConfig = true;
   };
 
-   services = {
+  services = {
     xserver = {
       xkb.layout = "fr";
       xkb.variant = "latin9";

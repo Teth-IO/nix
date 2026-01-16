@@ -18,7 +18,7 @@
         conf = builtins.toJSON {
           show_banner = false;
           edit_mode = "emacs";
-          buffer_editor = "codium";
+          buffer_editor = "emacs";
           completions = {
             algorithm = "substring";
             sort = "smart";
@@ -149,8 +149,8 @@
         NIXPKGS_ALLOW_UNFREE = "1";
         NIXPKGS_ALLOW_INSECURE = "1";
         SHELL = "${pkgs.nushell}/bin/nu";
-        EDITOR = "codium";
-        VISUAL = "codium";
+        EDITOR = "emacs";
+        VISUAL = "emacs";
         CARAPACE_BRIDGES = "inshellisense,carapace,zsh,fish,bash";
       };
       extraEnv = "$env.CARAPACE_BRIDGES = 'inshellisense,carapace,zsh,fish,bash'";
