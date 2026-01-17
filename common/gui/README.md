@@ -19,15 +19,15 @@ a l'inverse du server qui lui est en LTS pour la compatibilite ZFS on utilise ic
 
 | type |  choix  | infos |
 |----------|----------|----------|
-| alimentation | tuned | le plus moderne |
-| desktop protocol | wayland | le plus moderne |
+| alimentation | tuned | moderne |
+| desktop protocol | wayland | moderne |
 | environnement | niri | hyper agreable |
 | DE shell |  dankmaterialshell  | basé sur quickshell (best), integre aussi un greeter |
 | terminal |  foot  | moderne, minimaliste, légé, rapide et supporte tout  [ranking](https://ucs-detect.readthedocs.io/results.html#general-tabulated-summary)|
-| shell |  nushell  | operators pour les calculs, Everything is data et tout ce qu’on attend de base (completion, proposition, historique ) |
-| graphics |  vulkan  | le plus moderne |
-| sounds |  pipewire  | le plus moderne |
-| launcher |  rofi  | populaire, modulable |
+| shell |  elvish  | meilleur navigation, completion et gestion d'erreur/hang |
+| graphics |  vulkan  | moderne |
+| sounds |  pipewire  | moderne |
+| launcher |  fuzzel  | wayland natif, clean |
 | icons | Papirus-Dark | top |
 | cursor | Bibata-Original-Ice | top |
 
