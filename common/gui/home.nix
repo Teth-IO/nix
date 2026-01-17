@@ -7,13 +7,8 @@
 }:
 {
   imports = [
-    #./modules/hyprland.nix
     ./modules/foot.nix
-    ./modules/nushell.nix
-    #./modules/caelestia.nix
-    ./modules/yazi.nix
     ./modules/dms.nix
-    ./modules/zellij.nix
     inputs.nix-doom-emacs-unstraightened.homeModule
   ];
 
@@ -33,7 +28,7 @@
     packages = with pkgs; [ xwayland-satellite ];
   };
 
-  # theme
+  # theme qt/gtk (police, cuseur et icones)
   qt = {
     enable = true;
     platformTheme.name = "gtk3";
@@ -74,16 +69,22 @@
     };
   };
 
-  # rofi
-  programs.rofi = {
+  # fuzzel theme https://github.com/kuripa/oxocarbon-fuzzel
+  programs.fuzzel = {
     enable = true;
-    extraConfig = {
-      modi = "drun";
-      display-drun = " Apps";
-      hover-select = true;
+    settings = {
+      colors = {
+        background = "161616ff";
+        text = "ffffffff";
+        match = "ee5396ff";
+        selection-match = "ee5396ff";
+        selection = "262626ff";
+        selection-text = "33b1ffff";
+        border = "525252ff";
+      };
     };
   };
-
+  
   # doom emcacs
   programs.doom-emacs = {
     enable = true;

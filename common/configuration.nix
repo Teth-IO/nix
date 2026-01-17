@@ -115,4 +115,9 @@
   # certs
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ./certs/lan.pem ];
 
+  # Shell Aliases
+  environment.shellAliases = {
+    ls = "ls --color=auto";
+    ll = "ls -la";
+  }; 
 }

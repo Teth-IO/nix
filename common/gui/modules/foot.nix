@@ -11,14 +11,14 @@
     settings = {
       main = {
         #term = "xterm-256color";
-        shell = "nu";
+        shell = "elvish";
         font = "BlexMono Nerd Font:size=9:fontfeatures=calt:fontfeatures=dlig:fontfeatures=fbarc:fontfeatures=liga";
         dpi-aware = "yes";
         horizontal-letter-offset = 0;
         vertical-letter-offset = 0;
         pad = "0x0";
         selection-target = "clipboard";
-        #bold-text-in-bright = "true";
+        bold-text-in-bright = "true";
       };
       desktop-notifications.command = "${lib.getExe pkgs.libnotify} -a \${app-id} -i \${app-id} \${title} \${body}";
       scrollback = {
@@ -40,35 +40,30 @@
         font-monospace-warn = "no";
         sixel = "yes";
       };
-      #colors = {
-      #  # kanso zen
-      #  alpha = 1.0;
-      #  background = "090E13";
-      #  foreground = "C5C9C7";
-      #  selection-background = "22262d";
-      #  selection-foreground = "C5C9C7";
-      #  urls = "72A7BC";
-      #
-      #  # normal
-      #  regular0 = "090e13";
-      #  regular1 = "c4746e";
-      #  regular2 = "8a9a7b";
-      #  regular3 = "c4b28a";
-      #  regular4 = "090e13"; # background color des apps en TUI, anciennement 8ba4b0
-      #  regular5 = "a292a3";
-      #  regular6 = "8ea4a2";
-      #  regular7 = "a4a7a4";
-      #
-      #  # bright
-      #  bright0 = "5c6066";
-      #  bright1 = "E46876";
-      #  bright2 = "87a987";
-      #  bright3 = "E6C384";
-      #  bright4 = "7FB4CA";
-      #  bright5 = "938AA9";
-      #  bright6 = "7AA89F";
-      #  bright7 = "C5C9C7";
-      #};
+      colors = {
+        ## couleur zenburn pour app TUI
+        background = "111111";
+        foreground = "dcdccc";
+      
+        # normal
+        regular0 = "222222";
+        regular1 = "cc9393";
+        regular2 = "7f9f7f";
+        regular3 = "d0bf8f";
+        regular4 = "6ca0a3"; # background color des apps en TUI
+        regular5 = "dc8cc3";
+        regular6 = "93e0e3";
+        regular7 = "dcdccc";
+      
+        # bright
+        bright0 = "666666";
+        bright1 = "dca3a3";
+        bright2 = "bfebbf";
+        bright3 = "f0dfaf";
+        bright4 = "8cd0d3";
+        bright5 = "fcace3";
+        bright6 = "b3ffff";
+        bright7 = "ffffff";
     };
   };
 }

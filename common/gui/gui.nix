@@ -10,7 +10,7 @@
 
   imports = [ 
     inputs.niri.nixosModules.niri
-    #inputs.dms.nixosModules.greeter
+    inputs.dms.nixosModules.greeter
   ];
 
   nixpkgs.overlays = [ 
@@ -37,6 +37,13 @@
   })
   ];
 
+  # niri greeter, display manager, session manager
+  programs.dankMaterialShell.greeter = {
+    enable = true;
+    compositor.name = "niri";  # Or "hyprland" or "sway"
+    configHome = "/home/teth-io";
+  };
+  
   # niri
   programs.niri = {
     enable = true;
@@ -163,8 +170,7 @@
 
     ## cli stack
     foot
-    zellij
-    nushell
+    elvish
 
     ## Utils
     zip

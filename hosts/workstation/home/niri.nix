@@ -99,7 +99,7 @@
         "Mod+S".action = switch-preset-column-width;
         "Mod+F".action = maximize-column;
         "Mod+L".action = spawn-sh "dms ipc call lock lock";
-        "Mod+space".action = spawn-sh "rofi -show drun";
+        "Mod+space".action = spawn-sh "fuzzel";
         "Mod+Return".action = spawn "foot";
         "Print".action = spawn-sh "flameshot gui";
         "Mod+Print".action.screenshot-screen = {write-to-disk = true;};
