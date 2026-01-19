@@ -1,10 +1,7 @@
 {
-  modulesPath,
-  lib,
   pkgs,
-  inputs,
   ...
-} @ args:
+}:
 {
   # boot
   boot = {
@@ -47,7 +44,7 @@
   boot.kernelModules = ["tcp_bbr"];
 
   # cache v2
-  nix.binaryCaches = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
+  nix.settings.substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
   
   # zram
   zramSwap.enable = true;
@@ -73,7 +70,6 @@
   
   # power management 
   services.upower.enable = true;
-  services.tuned.enable = true;
 
   # firmware update
   services.fwupd.enable = true;

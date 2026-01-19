@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -11,7 +10,7 @@
     settings = {
       main = {
         #term = "xterm-256color";
-        shell = "elvish";
+        shell = "fish";
         font = "BlexMono Nerd Font:size=9:fontfeatures=calt:fontfeatures=dlig:fontfeatures=fbarc:fontfeatures=liga";
         dpi-aware = "yes";
         horizontal-letter-offset = 0;
@@ -64,6 +63,7 @@
         bright5 = "fcace3";
         bright6 = "b3ffff";
         bright7 = "ffffff";
+      };
     };
   };
 }

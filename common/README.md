@@ -51,3 +51,9 @@ Manuellement on utilise :
 - `nixos-rebuild switch --flake git+https://gitea.lan/admin/nix#server`
 
 le lock file est mis à jour directement depuis le dépôt par une action
+
+## gestion de l'alimentation du duree de vie batterie
+
+upower par defaut pour tout le monde  
+thermald pour les machines intel  
+auto-cpufreq pour les laptop  

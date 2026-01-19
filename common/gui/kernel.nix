@@ -2,11 +2,11 @@
   lib,
   pkgs,
   ...
-} @ args:
+}:
 {
   boot.kernelPackages = pkgs.linuxPackagesFor
   (pkgs.linuxKernel.kernels.linux_6_18.override {
-    argsOverride = rec {
+    argsOverride = {
       stdenv = pkgs.kernllvmPackages.stdenv;
       extraMakeFlags = [
         "LLVM=1"

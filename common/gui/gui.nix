@@ -1,16 +1,13 @@
 {
-  modulesPath,
-  lib,
   pkgs,
   inputs,
   ...
-} @ args:
+}:
 {
   nixpkgs.config.allowUnfree = true;
 
   imports = [ 
     inputs.niri.nixosModules.niri
-    inputs.dms.nixosModules.greeter
   ];
 
   nixpkgs.overlays = [ 
@@ -37,11 +34,15 @@
   })
   ];
 
-  # niri greeter, display manager, session manager
-  programs.dankMaterialShell.greeter = {
+  # display manager
+  services.displayManager.ly = {
     enable = true;
-    compositor.name = "niri";  # Or "hyprland" or "sway"
-    configHome = "/home/teth-io";
+    settings = {
+      bigclock = "en";
+      clock = "%c";
+      animation = "doom";
+      battery_id = "BAT0";
+    };
   };
   
   # niri
@@ -170,7 +171,10 @@
 
     ## cli stack
     foot
-    elvish
+    fish
+
+    ## lsp
+    nil
 
     ## Utils
     zip
@@ -201,5 +205,6 @@
     fastfetch
     pciutils
     lshw
+    fd
   ];
 }

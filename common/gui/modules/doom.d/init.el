@@ -1,3 +1,5 @@
+;;; init.el -*- lexical-binding: t; -*-
+
 ;; Copyright 2024 Google LLC
 ;;
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +14,38 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-;; -*- no-byte-compile: t; -*-
-;;; $DOOMDIR/packages.el
+(doom! :completion
+       vertico
 
-(package! evil-escape :disable t)
+       :ui
+       doom
+       doom-dashboard
+       modeline
+       nav-flash
+       ophints
+       (popup +defaults)
+       window-select
 
-(package! dotenv-mode)
+       :editor
+       ;;evil
+
+       :emacs
+       undo
+
+       :term
+       eshell
+       vterm
+
+       :os
+       (:if (featurep :system 'macos) macos)
+       (tty +osc)
+
+       :lang
+       emacs-lisp
+       (nix +lsp) 
+
+       :tools
+       (lsp +eglot)
+
+       :config
+       (default +bindings +smartparens))

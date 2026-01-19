@@ -1,7 +1,5 @@
 {
   config,
-  pkgs,
-  inputs,
   ...
 }:
 {
@@ -80,7 +78,12 @@
       };
       hotkey-overlay.skip-at-startup = true;
       spawn-at-startup = [
-        { sh = "owncloud"; }
+        {
+          sh = "owncloud";
+        }
+        {
+          command = [ "noctalia-shell"  ];
+        }
       ];
       binds = with config.lib.niri.actions; {
         "Mod+Left".action = focus-column-left;
@@ -98,7 +101,7 @@
         "Mod+Q".action = close-window;
         "Mod+S".action = switch-preset-column-width;
         "Mod+F".action = maximize-column;
-        "Mod+L".action = spawn-sh "dms ipc call lock lock";
+        "Mod+L".action = spawn-sh "noctalia-shell ipc call lockScreen lock";
         "Mod+space".action = spawn-sh "fuzzel";
         "Mod+Return".action = spawn "foot";
         "Print".action = spawn-sh "flameshot gui";

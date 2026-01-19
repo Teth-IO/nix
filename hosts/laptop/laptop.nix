@@ -1,10 +1,8 @@
 {
   modulesPath,
-  lib,
   pkgs,
-  inputs,
   ...
-} @ args:
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -36,13 +34,16 @@
   };
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
-  # thermal daemon
+  # thermal daemon (intel only)
   services.thermald.enable = true;
+
+  # auto-cpufreq
+  programs.auto-cpufreq.enable = true;
 
   # fingerpint
   services.fprintd.enable = true;
-  #services.fprintd.tod.enable = true;
-  #services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+  services.fprintd.tod.enable = true;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
   # home-manager
   home-manager = {

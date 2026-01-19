@@ -1,6 +1,4 @@
 {
-  modulesPath,
-  lib,
   pkgs,
   inputs,
   ...
@@ -8,7 +6,7 @@
 {
   imports = [
     ./modules/foot.nix
-    ./modules/dms.nix
+    ./modules/noctalia.nix
     inputs.nix-doom-emacs-unstraightened.homeModule
   ];
 
@@ -37,7 +35,6 @@
     enable = true;
     font = {
       name = "Inter";
-      #size = 12;
     };
     iconTheme = {
       package = pkgs.papirus-icon-theme;
@@ -88,8 +85,9 @@
   # doom emcacs
   programs.doom-emacs = {
     enable = true;
-    doomDir = ./doom.d;  # ou inputs.doom-config si la conf vie dans un repo qu'on peut import avec doom-config.url = "..."; dans les flake inputs
+    doomDir = ./modules/doom.d;  # ou inputs.doom-config si la conf vie dans un repo qu'on peut import avec doom-config.url = "..."; dans les flake inputs
   };
+  
   # flameshot
   services.flameshot = {
     enable = true;

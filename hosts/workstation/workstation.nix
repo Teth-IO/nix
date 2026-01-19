@@ -1,10 +1,8 @@
 {
   modulesPath,
-  lib,
   pkgs,
-  inputs,
   ...
-} @ args:
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")

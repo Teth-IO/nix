@@ -1,10 +1,8 @@
 {
   modulesPath,
-  lib,
   pkgs,
-  inputs,
   ...
-} @ args:
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -81,6 +79,9 @@
   sops.secrets.RESTIC_PASSWORD = {};
   sops.secrets.ZFS = {};
 
+  # thermal daemon (intel only)
+  services.thermald.enable = true;
+  
   # k3s
   services.k3s.enable = true;
   services.k3s.role = "server";
