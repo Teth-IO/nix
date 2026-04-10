@@ -80,7 +80,7 @@
     isNormalUser  = true;
     home  = "/home/teth-io";
     extraGroups  = [ "wheel" "networkmanager" "libvirtd" "gamemode" "openrazer" ];
-    hashedPassword = "$y$j9T$Cem8h7IeNvTZQ1Rz/c6il.$ZJ7GCbBDDhoMEl50i4PDN7K0VeZvUJCB5k7oz7ATrZ1";
+    hashedPassword = "redacted";
   };
 
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
