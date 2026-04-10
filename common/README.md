@@ -9,7 +9,7 @@ Plymouth est desactive car j'aime voir ce qu'il se passe (et les potentiels erre
 
 ```nix
   boot = {
-    #plymouth.enable = true;
+    plymouth.enable = true;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     initrd.systemd.enable = true;
@@ -19,7 +19,6 @@ Plymouth est desactive car j'aime voir ce qu'il se passe (et les potentiels erre
     };
   };
 ```
-
 ## optimisation reseau
 
 https://wiki.archlinux.org/title/Sysctl#Improving_performance  

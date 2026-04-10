@@ -64,6 +64,8 @@
           };
         }
         determinate.nixosModules.default
+        auto-cpufreq.nixosModules.default
+        sops-nix.nixosModules.sops
       ];
     };
     nixosConfigurations.workstation = inputs.nixpkgs.lib.nixosSystem {
@@ -85,6 +87,7 @@
           };
         }
         determinate.nixosModules.default
+        sops-nix.nixosModules.sops
       ];
     };
   };

@@ -10,6 +10,7 @@ ici `mutableUsers = false;` pour les rendre declaratif, autrement dit les utilis
 
 on utilise sudo-rs pour sudo et su  
 on augmente aussi le nombre maximal de fichier pouvant etre ouvert, utile dans certaine situation notamment la compilation  
+rtkit est la pour du real-time scheduling de certain process et donc ameliorer les perf  
 
 ## BTRFS
 
@@ -23,7 +24,7 @@ a l'inverse du server qui lui est en LTS pour la compatibilite ZFS on utilise ic
 | display manager | ly | TUI, pixel animation |
 | environnement | niri | hyper agreable |
 | DE shell |  noctalia  | basé sur quickshell (best), le plus aboutie |
-| terminal |  foot  | moderne, minimaliste, légé, rapide et supporte tout  [ranking](https://ucs-detect.readthedocs.io/results.html#general-tabulated-summary)|
+| terminal |  foot  | moderne, minimaliste, légé, rapide et supporte tout  [ranking](https://ucs-detect.readthedocs.io/results.html#general-tabulated-summary) |
 | shell |  fish  | meilleur navigation, completion et gestion d'erreur/hang |
 | graphics |  vulkan  | moderne |
 | sounds |  pipewire  | moderne |
@@ -38,12 +39,14 @@ a l'inverse du server qui lui est en LTS pour la compatibilite ZFS on utilise ic
 bluetooth  
 keyring pour les apps qui l'utilises  
 ssh-agent pour les gestion des clefs ssh par keepass   
-police Inter pour les apps et blex mono nerd font pour le terminal
+police Inter pour les apps et blex mono nerd font pour le terminal  
+nautilus pour la gestion des fichiers par xdg-portal  
+sops pour la mise a disposition de secrets  
 
 ## Home-manager & home.nix
 
 permet d'etendre la capacite de Nixos aux environnements utilisateur en les rendants declaratif.  
-Integre la configuration de plusieurs app (yazi, nushell, foot, ...) et du theming (curseur, icon, ...)
+Integre la configuration de plusieurs app (hyprland, caelestia, kitty, yazi, ...) et du theming (curseur, icon, theme...)
 
 # disk-config.nix
 

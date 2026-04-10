@@ -11,7 +11,7 @@ NixOS est **déclaratif** (OS as Code) ce qui permet une grande capacité de cus
 Il est aussi **immutable** et garde à disposition le paramétarge et les binaires précédents ce qui permet de pouvoir **rollback** dans les versions précédentes de l’OS en cas de problème.  
 Les mise à jours sont **atomiques**, comme les transactions d'un base de donnée, ce qui permet de s'assurer que le system n'est pas cassé suite au changement.
 
-Cette distribution n’est pas parfaite, elle ne propose pas de MAC (Mandatory Access Control) et le secure-boot (lanzaboote) n’est pas encore upstream
+Cette distribution n’est pas parfaite, elle ne propose pas de MAC (Mandatory Access Control) et le secure-boot implique des étapes manuelles (donc pas déclaratif)
 
 ## flake.nix inputs
 
@@ -26,10 +26,10 @@ Installation se fait ici à partir de l'iso minimal par ssh avec [nixos-anywhere
 On désigne ici plusieurs nixosConfigurations, une par installation (server, pc portable, ...).  
 Chacune avec les modules quelle utiliseront : inputs et la configuration à suivre (./server/server.nix; ./laptop/laptop.nix)
 
-> [!WARNING]
+> **warning** Warning
 > Le hostname doit correspondre au nom de la configuration pour le programme de maj identifie la configuration à appliquer
 
-![laptop](./hosts/workstation/Screenshot-from-2026-01-19-23-23-40.png)
+![laptop](./hosts/laptop/Screenshot-from-2026-01-01-15-43-55.png)
 
 ## Installation
 
@@ -48,7 +48,7 @@ anywhere est lancé avec une commande :
 
 `<path to configuration>` peut être un dépôt git ou un chemin (e.g. `.` )
 
-> [!WARNING]
+> **warning** Warning
 > lors d'une installation par nixos-anywhere c'est le pc source qui build les packages pour le pc de destination, il faut donc penser à remplacer l'import de kernel.nix par boot.kernelPackages = pkgs.linuxPackages_latest; pour éviter une compilation en march=native sur une mauvaise architecure
 
 exemple depuis un dossier : `nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json  --flake .#hostname --target-host root@192.168.1.89`

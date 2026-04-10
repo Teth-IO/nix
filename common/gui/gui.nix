@@ -33,18 +33,7 @@
     };
   })
   ];
-
-  # display manager
-  services.displayManager.ly = {
-    enable = true;
-    settings = {
-      bigclock = "en";
-      clock = "%c";
-      animation = "doom";
-      battery_id = "BAT0";
-    };
-  };
-  
+    
   # niri
   programs.niri = {
     enable = true;
@@ -57,16 +46,10 @@
     packages = with pkgs; [
       inter
       nerd-fonts.blex-mono
-      eb-garamond
-      nerd-fonts.jetbrains-mono
-      noto-fonts-color-emoji
     ];
     fontconfig = {
       defaultFonts = {
-        serif = [ "EB Garamond" ];
         sansSerif = [ "Inter" ];
-        monospace = [ "JetBrains Mono" ];
-        emoji = [ "Noto Color Emoji" ];
       };
       antialias = true;
     };
@@ -79,17 +62,6 @@
   # bluetooth
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluez5-experimental;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
-        FastConnectable = true;
-      };
-      Policy = {
-        AutoEnable = true;
-      };
-    };
   };
 
   # audio
@@ -107,8 +79,8 @@
   users.users.teth-io = {
     isNormalUser  = true;
     home  = "/home/teth-io";
-    extraGroups  = [ "wheel" "networkmanager" "libvirtd" ];
-    hashedPassword = "redacted";
+    extraGroups  = [ "wheel" "networkmanager" "libvirtd" "gamemode" "openrazer" ];
+    hashedPassword = "$y$j9T$Cem8h7IeNvTZQ1Rz/c6il.$ZJ7GCbBDDhoMEl50i4PDN7K0VeZvUJCB5k7oz7ATrZ1";
   };
 
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
@@ -125,38 +97,43 @@
   };
   systemd.user.services.niri-flake-polkit.enable = false;
 
-  # ssh agent
-  #programs.ssh.startAgent = true;
-
-  # keyring (gnome keyring fait aussi le ssh agent)
-  #services.gnome.gnome-keyring.enable = true;
-  security.pam.services.greetd.enableGnomeKeyring = true;
-
   # increase max number of open file
   security.pam.loginLimits = [{
     domain = "*";
     type = "soft";
     item = "nofile";
-    value = "4096";
+    value = "65536";
+  }{
+    domain = "*";
+    type = "hard";
+    item = "nofile";
+    value = "1048576";  
   }];
 
   # virt-manager
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  # steam, besoin du runtime pour proton-ge donc en service auto
-  programs.steam = {
-    enable = true;
-  };
-
   # flatpak si besoin
   services.flatpak.enable = true;
 
+  # nautilus
+  services.gvfs.enable = true;
+
+  # correction agent ssh
+  services.gnome.gcr-ssh-agent.enable = false;
+  programs.ssh.startAgent = true;
+
+  # sops-nix
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
+  sops.secrets.keepass = {
+    format = "binary";
+    sopsFile = ./secrets/keepass;
+    mode = "444";
+  };
+
   environment.systemPackages = with pkgs; [
     ## Apps
-    lutris
-    #bottles
-    #heroic
     yazi
     librewolf
     keepassxc
@@ -164,34 +141,29 @@
     qbittorrent
     seahorse
     owncloud-client
-    vscodium
     xnviewmp
     (flameshot.override { enableWlrSupport = true; })
     nautilus
+    file-roller
     wl-clipboard
+    tor-browser
 
     ## cli stack
     foot
     fish
 
-    ## lsp
+    ## programming
     nil
-
+    nixfmt
+    texlive.combined.scheme-full
+    
     ## Utils
     zip
     unzip
     git
     lazygit
-    btop
-    gdu
-    dysk
     pavucontrol
-    protontricks
-    lact
-    gh
-    bash
     brightnessctl
-    cava
     coreutils
     file
     findutils
@@ -206,5 +178,7 @@
     pciutils
     lshw
     fd
+    age
+    sops
   ];
 }

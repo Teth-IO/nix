@@ -1,7 +1,7 @@
 {
   pkgs,
   ...
-}:
+}: 
 {
   # boot
   boot = {
@@ -94,12 +94,7 @@
   # flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
 
-  # maj auto et optimisation
-  system.autoUpgrade = {
-    enable = true;
-    flake = "git+https://gitea.lan/admin/nix";
-    dates = "10:00";
-  };
+  # store optimisation
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -111,9 +106,11 @@
   # certs
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ./certs/lan.pem ];
 
-  # Shell Aliases
+  # Shell
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
   environment.shellAliases = {
     ls = "ls --color=auto";
     ll = "ls -la";
-  }; 
+  };
 }

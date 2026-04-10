@@ -12,13 +12,32 @@
     ../../common/gui/kernel.nix
   ];
 
-  # réseau
+  # display manager
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      bigclock = "en";
+      clock = "%c";
+      animation = "doom";
+      battery_id = "BAT0";
+    };
+  };
+ 
+ # réseau
   networking = {
     hostName = "laptop";
     nameservers = [ "9.9.9.9" ];
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = true;
+    };
     useDHCP = false;
     dhcpcd.enable = false;
+    extraHosts =
+      ''
+        192.168.1.200 gitea.lan
+        192.168.1.200 headlamp.lan
+      '';
   };
 
   ## Hardware_video_acceleration, xf68 pour xserver et lib 32 pour steam
@@ -37,6 +56,11 @@
   # thermal daemon (intel only)
   services.thermald.enable = true;
 
+  # extra packages
+  environment.systemPackages = with pkgs; [
+    btop
+  ];
+    
   # auto-cpufreq
   programs.auto-cpufreq.enable = true;
 

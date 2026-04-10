@@ -15,7 +15,7 @@
   # boot
   boot = {
     supportedFilesystems = ["zfs"];
-    #zfs.extraPools = [ "raid" ];
+    zfs.extraPools = [ "raid" ];
     kernelPackages = pkgs.linuxPackages;
   };
 
@@ -29,7 +29,7 @@
     interfaces = {
       eth0 = {
         ipv4.addresses = [{
-          address = "192.168.1.201";
+          address = "192.168.1.200";
           prefixLength = 24;
         }];
       };
@@ -40,6 +40,14 @@
     };
   };
 
+  # Maj auto
+  system.autoUpgrade = {
+    enable = true;
+    flake = "git+https://gitea.lan/admin/nix";
+    dates = "07:00";
+    allowReboot = true;
+  };
+  
   # ZFS
   services.zfs = {
     autoSnapshot.enable = true;
@@ -66,6 +74,7 @@
     fluxcd
     age
     sops
+    kubernetes-helm
   ];
 
   # sops-nix
@@ -81,10 +90,13 @@
 
   # thermal daemon (intel only)
   services.thermald.enable = true;
-  
+
   # k3s
   services.k3s.enable = true;
   services.k3s.role = "server";
 
+  # docker
+  virtualisation.docker.enable = true;
+  
   system.stateVersion = "26.05";
 }

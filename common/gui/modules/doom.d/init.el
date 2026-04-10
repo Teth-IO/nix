@@ -25,9 +25,10 @@
        ophints
        (popup +defaults)
        window-select
+       treemacs
 
        :editor
-       ;;evil
+       evil
 
        :emacs
        undo
@@ -42,10 +43,16 @@
 
        :lang
        emacs-lisp
-       (nix +lsp) 
+       (nix +lsp)
+       markdown
+       yaml
 
        :tools
        (lsp +eglot)
+       magit
+       pdf
 
        :config
        (default +bindings +smartparens))
+
+(add-hook 'emacs-startup-hook 'treemacs)

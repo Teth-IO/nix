@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
@@ -19,20 +19,13 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            luks = {
+            zfs = {
               size = "100%";
               content = {
-                type = "luks";
-                name = "crypted";
-                settings = {
-                  allowDiscards = true;
-                };
-                content = {
-                  type = "zfs";
-                  pool = "zroot";
-                };
+                type = "zfs";
+                pool = "zroot";
               };
-            };
+            };  
           };
         };
       };

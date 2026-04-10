@@ -20,6 +20,8 @@
         QS_ICON_THEME = "Papirus-Dark";
         QT_QPA_PLATFORMTHEME = "qt6ct";
         GTK_IM_MODULE = "simple";
+        XDG_CURRENT_DESKTOP = "niri";
+        XDG_SESSION_DESKTOP = "niri";       
       };
       input = {
         touchpad = {
@@ -45,6 +47,7 @@
       outputs = {
         "eDP-1" = {
           scale = 2.0;
+          variable-refresh-rate = true;
         };
       };
       gestures = {

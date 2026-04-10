@@ -5,7 +5,13 @@
 }:
 {
   imports = [
+    #./modules/hyprland.nix
     ./modules/foot.nix
+    #./modules/nushell.nix
+    #./modules/caelestia.nix
+    #./modules/yazi.nix
+    #./modules/dms.nix
+    #./modules/zellij.nix
     ./modules/noctalia.nix
     inputs.nix-doom-emacs-unstraightened.homeModule
   ];
@@ -49,20 +55,19 @@
 
   # desktopEntries pour ajouter des entree dans l'app launcher
   xdg.desktopEntries = {
-    # steam avec -system-composer pour niri
-    steam = {
-      name = "Steam";
-      genericName = "Steam niri";
-      exec = "steam -system-composer %U";
-      terminal = false;
-      #categories = [ "Game" ];
-    };
+    # missing entries 
     xnviewmp = {
       name = "XnView MP";
-      genericName = "Image viewer";
       exec = "xnviewmp %U";
+      icon = "xnviewmp";
       terminal = false;
-      #categories = [ "Graphics" ];
+    };
+    # platform xcb pour l'autotype
+    keepassxc = {
+      name = "KeePassXC xcb";
+      exec = "keepassxc -platform xcb %U";
+      icon = "keepassxc";
+      terminal = false;
     };
   };
 
@@ -81,13 +86,13 @@
       };
     };
   };
-  
-  # doom emcacs
+
+  # doom emacs https://github.com/marienz/nix-doom-emacs-unstraightened
   programs.doom-emacs = {
     enable = true;
     doomDir = ./modules/doom.d;  # ou inputs.doom-config si la conf vie dans un repo qu'on peut import avec doom-config.url = "..."; dans les flake inputs
   };
-  
+
   # flameshot
   services.flameshot = {
     enable = true;

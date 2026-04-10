@@ -2,11 +2,7 @@
 
 (fait suite au premier README)  
 
-> [!WARNING]
-> commenter `boot.zfs.extraPools = [ "raid" ];` s'il n'est pas présent sinon bloque le boot
-
 Importer la age key dans `/root/.config/sops/age/keys.txt`  
-Rebuild pour que les SOPS se mettent  
 lancer `zfs set keylocation=file:///run/secrets/ZFS raid/nas` pour que le dataset raid/nas cherche la clef dans le secret exposé par SOPS-nix au lieu de demander le mdp au boot   
 connexion au tailnet  
 fluxcd (voir k3s)
@@ -38,11 +34,11 @@ ce qui correspond a :
 
 ## pool pour les datas du serveur
 
-Les données des applications hébergées sous K3S seront sous un pool ZFS en mirroir (RAID 1)
+Les données des applications déployées sous K3S seront hébergées sous un pool ZFS en mirroir (RAID 1) en simple hostPath
 
 création du pool raid est dataset nas avec les meme options que ci-dessus :
 
-`zpool create -o ashift=12 -O xattr=sa -O compression=lz4 -O atime=off -O -m /mnt/raid raid mirror /dev/sda /dev/sdb`
+`zpool create -o ashift=12 -O xattr=sa -O compression=lz4 -O atime=off -O recordsize=1M -m /mnt/raid raid mirror /dev/sda /dev/sdb`
 
 ajout du chiffrement au pool :
 
@@ -56,7 +52,7 @@ aussi possible de changer la keylocation par un fichier au lieu du prompt, ce qu
 
 snapshot automatiques (par défaut : 4 de 15 minutes, 24 toutes les heures, 7 journalières, 4 hebdomadères, 12 mensuelles), trim, scrub et paramétrage de ZED
 
-> [!WARNING]
+> **warning** Warning
 > besoin de `zfs set com.sun:auto-snapshot=true raid` pour que les snapshot auto soit accepté par le pool
 
 ```nix
@@ -92,7 +88,7 @@ On utilise le kernel standard (en LTS) pour la compatibilite avec le ZFS
 
 # SOPS-Nix
 
-On chiffre nos secets avec age. La clef privé est déclaré avec  `sops.age.keyFile`. Les secrets dont on a besoin sont dans un fichier  secrets.json et monté avec `sops.defaultSopsFile`.
+On chiffre nos secets avec age. La clef privé est déclaré avec `sops.age.keyFile`. Les secrets dont on a besoin sont dans un fichier secrets.json et monté avec `sops.defaultSopsFile`.
 
 Exemple de fonctionnement :
 

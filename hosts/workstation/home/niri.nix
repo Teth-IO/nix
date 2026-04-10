@@ -20,6 +20,8 @@
         QS_ICON_THEME = "Papirus-Dark";
         QT_QPA_PLATFORMTHEME = "qt6ct";
         GTK_IM_MODULE = "simple";
+        XDG_CURRENT_DESKTOP = "niri";
+        XDG_SESSION_DESKTOP = "niri";       
       };
       input = {
         touchpad = {
@@ -44,12 +46,7 @@
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
         "DP-3" = {
-          scale = 1.0;
-          mode = {
-            width = 3440;
-            height = 1440;
-            refresh = 144.001;
-          };
+          variable-refresh-rate = true;
         };
       };
       gestures = {
@@ -78,12 +75,8 @@
       };
       hotkey-overlay.skip-at-startup = true;
       spawn-at-startup = [
-        {
-          sh = "owncloud";
-        }
-        {
-          command = [ "noctalia-shell"  ];
-        }
+        { argv = [ "owncloud" ]; }
+        { command = [ "noctalia-shell" ]; }
       ];
       binds = with config.lib.niri.actions; {
         "Mod+Left".action = focus-column-left;

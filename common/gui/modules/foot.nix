@@ -39,29 +39,28 @@
         font-monospace-warn = "no";
         sixel = "yes";
       };
-      colors = {
-        ## couleur zenburn pour app TUI
-        background = "111111";
-        foreground = "dcdccc";
+      colors-dark = {
+        background = "101421";
+        foreground = "fffbf6";
       
         # normal
-        regular0 = "222222";
-        regular1 = "cc9393";
-        regular2 = "7f9f7f";
-        regular3 = "d0bf8f";
-        regular4 = "6ca0a3"; # background color des apps en TUI
-        regular5 = "dc8cc3";
-        regular6 = "93e0e3";
-        regular7 = "dcdccc";
+        regular0 = "2e2e2e";
+        regular1 = "eb4129";
+        regular2 = "abe047";
+        regular3 = "f6c744";
+        regular4 = "47a0f3"; # background color des apps en TUI
+        regular5 = "7b5cb0";
+        regular6 = "64dbed";
+        regular7 = "e5e9f0";
       
         # bright
-        bright0 = "666666";
-        bright1 = "dca3a3";
-        bright2 = "bfebbf";
-        bright3 = "f0dfaf";
-        bright4 = "8cd0d3";
-        bright5 = "fcace3";
-        bright6 = "b3ffff";
+        bright0 = "565656";
+        bright1 = "ec5357";
+        bright2 = "c0e17d";
+        bright3 = "f9da6a";
+        bright4 = "49a4f8";
+        bright5 = "a47de9";
+        bright6 = "99faf2";
         bright7 = "ffffff";
       };
     };
