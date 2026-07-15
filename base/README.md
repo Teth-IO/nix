@@ -4,7 +4,7 @@ la configuration communes a toutes mes installations
 
 ## Boot
 
-On utilise limine comme bootloader moderne qui support le secure boot et measured boot pour nixos. On monte aussi le tmp sur tmpfs et divers amléioration réseau par sysctl (TCP fast open, ...) et l'action du bbr.  
+On utilise limine comme bootloader moderne qui support le secure boot et measured boot pour nixos. On monte aussi le tmp sur tmpfs et divers amléioration réseau par sysctl (TCP fast open, ...) et l'activation du bbr.  
 
 ```nix
   boot = {
