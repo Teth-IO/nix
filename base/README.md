@@ -70,7 +70,7 @@ parametrage specifique a nixos
 ```
 
 Garbage Collection qui supprime les configuration systèmes précédentes après 7 jours et le lancement automatique de l’optimisateur du nix store après chaque build.
-Le substituters est le cache v2 qui permet un telechargement beaucoup plus rapide dea app que depuis le cache par defaut https://wiki.nixos.org/wiki/Maintainers:Fastly#Cache_v2_plans
+Le substituters est le cache v2 qui permet un telechargement beaucoup plus rapide que depuis le cache par defaut https://wiki.nixos.org/wiki/Maintainers:Fastly#Cache_v2_plans
 le tarball ttl a 0 permet d'eviter le comportement par defaut qui est de mettre en cache pendant 1h les depots avec lesquels on interagit (ce aui pose probleme quand on maj le notre pour debug)
 
 Manuellement on utilise :
