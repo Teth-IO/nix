@@ -144,6 +144,6 @@ auto-cpufreq pour les laptop
 
 ## autre
 
-zram : partie de RAM compressé avec lz4 qui fait office de swap (pour ne pas utiliser de swap sur dique) 
+zram : partie de RAM compressé avec lz4 qui fait office de swap (pour ne pas utiliser de swap sur dique)  
 clef publique perso  
 fwupd (pour la maj de firmware)  
