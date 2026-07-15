@@ -4,38 +4,69 @@ la configuration communes a toutes mes installations
 
 ## Boot
 
-On utilise systemd-boot comme solution légère et moderne. On utilise aussi le module de kernel zram pour utiliser de la RAM compressé comme swap et on active le tmp sur tmpfs.  
+On utilise limine comme bootloader moderne qui support le secure boot et measured boot pour nixos. On monte aussi le tmp sur tmpfs et divers amléioration réseau par sysctl (TCP fast open, ...) et l'action du bbr.  
 
 ```nix
   boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    initrd.systemd.enable = true;
+    loader = {
+      limine.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
     tmp = {
       useTmpfs = true;
       cleanOnBoot = true;
     };
+    kernel.sysctl = {
+	  ## https://wiki.archlinux.org/title/Sysctl#Improving_performance
+	  "net.ipv4.icmp_ignore_bogus_error_responses" = 1;
+      "net.ipv4.conf.default.rp_filter" = 1;
+      "net.ipv4.conf.all.rp_filter" = 1;
+      "net.ipv4.conf.all.accept_source_route" = 0;
+      "net.ipv6.conf.all.accept_source_route" = 0;
+      "net.ipv4.conf.all.send_redirects" = 0;
+      "net.ipv4.conf.default.send_redirects" = 0;
+      "net.ipv4.conf.all.accept_redirects" = 0;
+      "net.ipv4.conf.default.accept_redirects" = 0;
+      "net.ipv4.conf.all.secure_redirects" = 0;
+      "net.ipv4.conf.default.secure_redirects" = 0;
+      "net.ipv6.conf.all.accept_redirects" = 0;
+      "net.ipv6.conf.default.accept_redirects" = 0;
+      "net.ipv4.tcp_fastopen" = 3;
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq_codel";
+      "net.ipv4.tcp_window_scaling" = 1;
+      "net.ipv4.tcp_low_latency" = 1;
+      "net.ipv4.tcp_adv_win_scale" = 1;
+      "net.ipv4.tcp_fin_timeout" = 10;
+      "net.ipv4.tcp_tw_reuse" = 1;
+    };
+    # add BBR patch
+    kernelModules = ["tcp_bbr"];
   };
 ```
-## optimisation reseau
-
-https://wiki.archlinux.org/title/Sysctl#Improving_performance  
-divers optimisation, notamment l'ajout du BBR et le TCP Fast Open  
 
 ## Nix
 
 parametrage specifique a nixos
 
 ```nix
-  nix.settings.substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  nix = {
+    settings = {
+      # cache v2
+      substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
+      # store optimisation
+      auto-optimise-store = true;
+      # ttl du cache des dépôts
+      tarball-ttl = "0";
+    };
+    # cleaning des vielles générations
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
-  nix.settings.auto-optimise-store = true;
-  nix.settings.tarball-ttl = "0";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
 ```
 
 Garbage Collection qui supprime les configuration systèmes précédentes après 7 jours et le lancement automatique de l’optimisateur du nix store après chaque build.

@@ -42,9 +42,6 @@
     kernelModules = ["tcp_bbr"];
   };
     
-  # cache v2
-  nix.settings.substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
-  
   # zram
   zramSwap = {
     enable = true;
@@ -96,14 +93,23 @@
   # flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
 
-  # store optimisation
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  # nix spécifique store optimisation
+  nix = {
+    settings = {
+      # cache v2
+      substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
+      # store optimisation
+      auto-optimise-store = true;
+      # ttl du cache des dépôts
+      tarball-ttl = "0";
+    };
+    # cleaning des vielles générations
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
-  nix.settings.auto-optimise-store = true;
-  nix.settings.tarball-ttl = "0";
 
   # certs
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ./certs/lan.pem ];

@@ -39,13 +39,14 @@ Activation du trim et scrub
 | sounds |  pipewire  | moderne |
 | launcher |  noctalia  | built-in |
 | icons | Papirus-Dark | classique |
+| cursor | Bibata original ice | classique |
 | editor | doom emacs | sane defaults, extensible, customizable, org mode |
 | web browser | librewolf | sane defaults |
 
 ## autre
 
 bluetooth  
-keyring pour les apps qui l'utilises  
+keyring pour les apps qui l'utilise  
 ssh-agent pour les gestion des clefs ssh par keepass   
 police Inter pour les apps et blex mono nerd font pour le terminal  
 nautilus pour la gestion des fichiers par xdg-portal  
@@ -88,8 +89,8 @@ https://wiki.gentoo.org/wiki/Kernel/Optimization
 compilation :  
 - en LLVM/clang  
 - en march=native avec la config associe (kernel 6.16+)  
-- avec thinlto et la config associe (kernel 5.12+)  
-- en -O3 (n'est absolument pas recommandé)
+- avec fulltlo et la config associe (kernel 5.12+)  
+- en -O3 (n'est pas recommandé)
 
 note : les options de configuration du kernel en fonctionnement sont disponibles sous /proc/config.gz  
 exemple :  
