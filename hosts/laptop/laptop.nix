@@ -1,29 +1,36 @@
 {
   modulesPath,
   pkgs,
+  inputs,
   ...
 }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../common/gui/disk-config.nix
-    ../../common/configuration.nix
-    ../../common/gui/gui.nix
-    ../../common/gui/kernel.nix
+    ../../gui/disk-config.nix
+    ../../base/configuration.nix
+    ../../gui/gui.nix
+    ../../gui/modules/kernel.nix 
+    inputs.noctalia-greeter.nixosModules.default
   ];
 
+  # boot
+  boot.loader.limine.secureBoot.enable = true;
+  
   # display manager
   services.displayManager.ly = {
     enable = true;
     settings = {
       bigclock = "en";
       clock = "%c";
-      animation = "doom";
       battery_id = "BAT0";
+      animation = "dur_file";
+      dur_file_path = "/home/teth-io/ownCloud/Personal/Images/blackhole-smooth-240x67.dur";
+      full_color = "true";
     };
   };
- 
- # réseau
+
+  # réseau
   networking = {
     hostName = "laptop";
     nameservers = [ "9.9.9.9" ];
@@ -33,23 +40,21 @@
     };
     useDHCP = false;
     dhcpcd.enable = false;
-    extraHosts =
-      ''
-        192.168.1.200 gitea.lan
-        192.168.1.200 headlamp.lan
-      '';
   };
 
   ## Hardware_video_acceleration, xf68 pour xserver et lib 32 pour steam
   services.xserver.videoDrivers = [ "intel" ];
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-compute-runtime
-      vpl-gpu-rt
-    ];
-    enable32Bit = true;
+  hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        intel-compute-runtime
+        vpl-gpu-rt
+      ];
+      enable32Bit = true;
+    };
+    cpu.intel.updateMicrocode = true;
   };
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 

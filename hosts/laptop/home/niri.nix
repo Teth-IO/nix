@@ -51,17 +51,15 @@
         };
       };
       gestures = {
-        hot-corners.enable = true;
+        hot-corners.enable = false;
       };
       layout = {
         focus-ring.enable = false;
         preset-column-widths = [
-          {proportion = 0.25;}
           {proportion = 0.5;}
-          {proportion = 0.75;}
           {proportion = 1.0;}
         ];
-        default-column-width = {proportion = 0.5;};
+        default-column-width = {proportion = 1.0;};
         gaps = 6;
         tab-indicator = {
           hide-when-single-tab = true;
@@ -76,13 +74,20 @@
       };
       hotkey-overlay.skip-at-startup = true;
       spawn-at-startup = [
-        {
-          sh = "owncloud";
-        }
-        {
-          command = [ "noctalia-shell"  ];
-        }
+        { sh = "owncloud";}
+        { command = [ "noctalia" ];}
       ];
+      window-rules = [{
+        geometry-corner-radius = let
+          radius = 12.0;
+        in {
+          bottom-left = radius;
+          bottom-right = radius;
+          top-left = radius;
+          top-right = radius;
+        };
+        clip-to-geometry = true;
+      }];
       binds = with config.lib.niri.actions; {
         "Mod+Left".action = focus-column-left;
         "Mod+Down".action = focus-workspace-down;
@@ -97,10 +102,10 @@
         "Mod+Shift+Up".action = move-column-to-workspace-up;
         "Mod+Shift+Down".action = move-column-to-workspace-down;
         "Mod+Q".action = close-window;
-        "Mod+S".action = switch-preset-column-width;
-        "Mod+F".action = maximize-column;
-        "Mod+L".action = spawn-sh "noctalia-shell ipc call lockScreen lock";
-        "Mod+space".action = spawn-sh "fuzzel";
+        "Mod+F".action = switch-preset-column-width;
+        "Mod+Shift+F".action = fullscreen-window;
+        "Mod+L".action = spawn-sh "noctalia msg session lock";
+        "Mod+space".action = spawn-sh "noctalia msg panel-toggle launcher";
         "Mod+Return".action = spawn "foot";
         "Print".action = spawn-sh "QT_SCALE_FACTOR=0.5 flameshot gui";
         "Mod+Print".action.screenshot-screen = {write-to-disk = true;};

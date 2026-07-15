@@ -9,7 +9,7 @@
     (modulesPath + "/profiles/minimal.nix")
     # config disk independante de celle commune (root on ZFS)
     ./disk-config.nix
-    ../../common/configuration.nix
+    ../../base/configuration.nix
   ];
 
   # boot
@@ -47,6 +47,9 @@
     dates = "07:00";
     allowReboot = true;
   };
+
+  # microcode
+  hardware.cpu.intel.updateMicrocode = true;
   
   # ZFS
   services.zfs = {
@@ -68,32 +71,30 @@
 
   # packages
   environment.systemPackages = with pkgs; [
-    curl
-    git
     restic
     fluxcd
-    age
-    sops
-    kubernetes-helm
   ];
 
   # sops-nix
-  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
-  sops.defaultSopsFile = ./secrets/secrets.json;
-  sops.defaultSopsFormat = "json";
-  sops.secrets.AWS_DEFAULT_REGION = {};
-  sops.secrets.RESTIC_REPOSITORY = {};
-  sops.secrets.AWS_ACCESS_KEY_ID = {};
-  sops.secrets.AWS_SECRET_ACCESS_KEY = {};
-  sops.secrets.RESTIC_PASSWORD = {};
-  sops.secrets.ZFS = {};
+  sops = {
+    age.keyFile = "/root/.config/sops/age/keys.txt";
+    defaultSopsFile = ./secrets/secrets.json;
+    defaultSopsFormat = "json";
+    secrets = {
+      AWS_DEFAULT_REGION = {};
+      RESTIC_REPOSITORY = {};
+      AWS_ACCESS_KEY_ID = {};
+      AWS_SECRET_ACCESS_KEY = {};
+      RESTIC_PASSWORD = {};
+      ZFS = {};
+    };
+  };
 
   # thermal daemon (intel only)
   services.thermald.enable = true;
 
   # k3s
   services.k3s.enable = true;
-  services.k3s.role = "server";
 
   # docker
   virtualisation.docker.enable = true;

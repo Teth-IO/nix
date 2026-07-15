@@ -88,35 +88,6 @@ On utilise le kernel standard (en LTS) pour la compatibilite avec le ZFS
 
 # SOPS-Nix
 
-On chiffre nos secets avec age. La clef privé est déclaré avec `sops.age.keyFile`. Les secrets dont on a besoin sont dans un fichier secrets.json et monté avec `sops.defaultSopsFile`.
-
-Exemple de fonctionnement :
-
-secrets.json en clair
-```json
-{
-  "ZFS" = "hunter2"
-}
-```
-
-Pour chiffrer un fichier on doit soit déclarer la clef publique a utilsier dans la commande soit disposé d’un fichier .sops.yaml dans l’arborescence d’où l’on lance la comande
-
-exemple sans yaml :
-`sops encrypt -i --age age1dyl0es8xaqda3qr0dmlrapdgz5ffslkv2sag5amccus8qdfgtsqslmk4hy secrets.json`
-
-La valeur hunter2 est maintenant chiffré 
-
-```json
-{
-  "ZFS" = "ENC[AES256_GCM,data:PYIu5nGPSL56+hAFXA==,iv:PL6CKlYss9ZUL4Cz8tMT62Cr5C6X4/I/JjvCoaYY8JA=,tag:dT1PAdn9X3/tL5y6t71b+A==,type:str]",
-        "sops": {
-                "age": [
-                        {...
-}
-```
-
-le sercret est disponible en clair sous `/run/secrets/ZFS` lorsqu'il est déclaré avec `sops.secrets.ZFS`. On peut aussi affiné quel programme a accès à quel secret
-
 Config utilisé :
 
 ```nix
@@ -130,18 +101,14 @@ Config utilisé :
   sops.secrets.RESTIC_PASSWORD = {};
   sops.secrets.ZFS = {};
 ```
+
+ZFS pour la clefs du pool chiffré, le reste comme valeur utilisé par le script de backup
+
 # DNS
 
 Le server est boostrap en 9.9.9.9
 le server doit être exempt de l'override dns de tailscale sinon lui même et les conteneurs n'auront plus de DNS en cas de redémarrage :
 tailscale set --accept-dns=false
-
-# K3S
-
-```nix
-  services.k3s.enable = true;
-  services.k3s.role = "server";
-```
 
 # note
 

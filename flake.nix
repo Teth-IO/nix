@@ -1,11 +1,11 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     sops-nix.url = "github:Mic92/sops-nix";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    preservation.url = "github:nix-community/preservation";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,33 +16,54 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
-    # Optional, to download less. Neither the module nor the overlay uses this input.
-    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "";
-
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs = {
+        doomdir.url = "./gui/modules/doom.d";
+        # Optional, to download less. Neither the module nor the overlay uses this input.
+        nixpkgs.follows = "";
+      };
+    };
+    
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, disko, nixos-facter-modules, sops-nix, determinate, auto-cpufreq, ... }@inputs: 
+  outputs = inputs: 
   {
-    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.server = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/server/server.nix
-        disko.nixosModules.disko
-        nixos-facter-modules.nixosModules.facter
+        inputs.disko.nixosModules.disko
+        inputs.nixos-facter-modules.nixosModules.facter
         { config.facter.reportPath = ./hosts/server/facter.json; }
-        sops-nix.nixosModules.sops
-        determinate.nixosModules.default
+        inputs.sops-nix.nixosModules.sops
+      ];
+    }; 
+    nixosConfigurations.server-next = inputs.nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/server-next/server.nix
+        inputs.disko.nixosModules.disko
+        inputs.preservation.nixosModules.default
+        inputs.nixos-facter-modules.nixosModules.facter
+        { config.facter.reportPath = ./hosts/server-next/facter.json; }
+        inputs.sops-nix.nixosModules.sops
       ];
     };
     nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
@@ -50,8 +71,8 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/laptop/laptop.nix
-        disko.nixosModules.disko
-        nixos-facter-modules.nixosModules.facter
+        inputs.disko.nixosModules.disko
+        inputs.nixos-facter-modules.nixosModules.facter
         { config.facter.reportPath = ./hosts/laptop/facter.json; }
         inputs.home-manager.nixosModules.home-manager
         {
@@ -63,9 +84,8 @@
             useUserPackages = true;
           };
         }
-        determinate.nixosModules.default
-        auto-cpufreq.nixosModules.default
-        sops-nix.nixosModules.sops
+        inputs.auto-cpufreq.nixosModules.default
+        inputs.sops-nix.nixosModules.sops
       ];
     };
     nixosConfigurations.workstation = inputs.nixpkgs.lib.nixosSystem {
@@ -73,8 +93,8 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/workstation/workstation.nix
-        disko.nixosModules.disko
-        nixos-facter-modules.nixosModules.facter
+        inputs.disko.nixosModules.disko
+        inputs.nixos-facter-modules.nixosModules.facter
         { config.facter.reportPath = ./hosts/workstation/facter.json; }
         inputs.home-manager.nixosModules.home-manager
         {
@@ -86,8 +106,7 @@
             useUserPackages = true;
           };
         }
-        determinate.nixosModules.default
-        sops-nix.nixosModules.sops
+        inputs.sops-nix.nixosModules.sops
       ];
     };
   };

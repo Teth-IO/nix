@@ -1,17 +1,22 @@
 {
   modulesPath,
   pkgs,
+  inputs,
   ...
 }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../common/gui/disk-config.nix
-    ../../common/configuration.nix
-    ../../common/gui/gui.nix
-    ../../common/gui/kernel.nix
+    ../../gui/disk-config.nix
+    ../../base/configuration.nix
+    ../../gui/gui.nix
+    ../../gui/modules/kernel.nix 
+    inputs.noctalia-greeter.nixosModules.default
   ];
 
+  # boot
+  boot.loader.limine.secureBoot.enable = true;
+  
   # réseau
   networking = {
     hostName = "workstation";
@@ -30,6 +35,18 @@
       ";
   };
 
+  # display manager
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      bigclock = "en";
+      clock = "%c";
+      animation = "dur_file";
+      dur_file_path = "/home/teth-io/ownCloud/Personal/Images/blackhole-smooth-240x67.dur";
+      full_color = "true";
+    };
+  };
+
   ## Hardware_video_acceleration, xf68 pour xserver, lib 32 pour steam et overcloking du gpu
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware = {
@@ -41,19 +58,20 @@
       enable32Bit = true;
     };
     amdgpu.overdrive.enable = true;
+    cpu.amd.updateMicrocode = true;
   };
 
   # règles udev pour openrgb
   services.hardware.openrgb.enable = true;
 
-  #openrazer
+  # openrazer
   hardware.openrazer.enable = true;
   
   # extra packages
   environment.systemPackages = with pkgs; [
-    openrgb
     lutris
-    protonup-qt
+    protonplus
+    gamescope
     openrazer-daemon
     (btop.override { rocmSupport = true; })
   ];
@@ -78,16 +96,6 @@
 
   # gamemode
   programs.gamemode.enable = true;
-  
-  # display manager
-  services.displayManager.ly = {
-    enable = true;
-    settings = {
-      bigclock = "en";
-      clock = "%c";
-      animation = "doom";
-    };
-  };
   
   # thermal daemon
   services.thermald.enable = true;

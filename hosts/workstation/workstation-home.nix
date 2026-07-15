@@ -4,7 +4,7 @@
 {
   imports = [
     ./home/niri.nix
-    ../../common/gui/home.nix
+    ../../gui/home.nix
   ];
 
   # desktopEntries pour ajouter des entree dans l'app launcher
